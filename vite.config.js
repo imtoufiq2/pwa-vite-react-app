@@ -14,6 +14,8 @@ let somethingWentWrong = '/something_went_wrong.svg';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: "/boardmeeting/",
+
   plugins: [
     react(),
     VitePWA({
@@ -38,4 +40,5 @@ export default defineConfig({
       },
     })
   ]
+
 })
