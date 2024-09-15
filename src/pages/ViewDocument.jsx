@@ -9,6 +9,7 @@ import decryptData from "../helpers/decryption";
 import Loader from "../components/loader/Loader";
 import { slideInRight } from "../helpers/animations";
 import { getDecryptedPDFForJWT } from "../helpers/pdfDecryption";
+import DarkMode from "../components/DarkMode";
 
 const ViewDocument = () => {
   const [loading, setLoading] = useState(false);
@@ -95,7 +96,7 @@ const ViewDocument = () => {
             searchQuery={""}
             setSearchQuery={() => {}}
           />
-
+          <DarkMode />
           <PdfViewer pdfUrl={getDecryptedPDFForJWT(reportFile)} />
         </Box>
       )}

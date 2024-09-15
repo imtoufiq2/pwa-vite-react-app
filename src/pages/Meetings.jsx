@@ -29,16 +29,11 @@ const Meetings = () => {
     }
   }, [navigate]);
 
-  // const handleSearch = (value) => {
-  //   setSearchQuery(value.trim().toLowerCase());
-  // };
   function sortMeetingsByDateAndTimeDesc(meetings) {
     return meetings.sort((a, b) => {
-      // Convert MeetingDate to Date objects for comparison
       const dateA = new Date(a.MeetingDate);
       const dateB = new Date(b.MeetingDate);
 
-      // Compare by MeetingDate first (in descending order)
       if (dateA > dateB) return -1;
       if (dateA < dateB) return 1;
 
@@ -63,6 +58,7 @@ const Meetings = () => {
 
   const getMeetings = useCallback(async () => {
     const body = { committeid: id ?? 0 };
+    if (!body?.committeid) return;
     try {
       setLoading(true);
       const encryptedData = encryptData(body);

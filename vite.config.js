@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 
-const faviconURL = "/vite.svg";
+const faviconURL = "/favicon.png";
 const reactLogoURL = "/react.svg";
 const brandingLogo = "/Branding_logo.png";
 const exportPdfIcon = "/icons8-export-pdf-50.png";
@@ -25,9 +25,9 @@ export default defineConfig({
         somethingWentWrong,
       ],
       manifest: {
-        name: "MOSL BoardBuddy",
-        short_name: "BoardBuddy",
-        description: "An intuitive meeting management tool for MOSL Motilal Oswal company board members.",
+        name: "MOSL Board Connect",
+        short_name: "BoardConnect",
+        description: "A comprehensive and intuitive meeting management tool for board members of MOSL (Motilal Oswal).",
         theme_color: "#fbb02f",
         icons: [
           {

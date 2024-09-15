@@ -12,12 +12,14 @@ import encryptData from "../../helpers/encryption";
 import decryptData from "../../helpers/decryption";
 import toast from "react-hot-toast";
 import ResponsiveImage from "../../components/Logo";
+import { LoadingButton } from "@mui/lab";
 
 const numberOfDigits = 6;
 export default function VerifyMobile() {
   const navigate = useNavigate();
 
   const [otp, setOtp] = useState(new Array(numberOfDigits).fill(""));
+  const [loading, setLoading] = useState(false);
 
   const otpBoxReference = useRef([]);
   const inputRefs = useRef([]);
@@ -99,19 +101,25 @@ export default function VerifyMobile() {
     //     decryptData(sessionStorage.getItem("userInfo")),
     //   UserOTP: otp.join(""),
     // };
+    // debugger;
+    setLoading(true);
     const loginData = sessionStorage.getItem("loginData")
       ? JSON.parse(sessionStorage.getItem("loginData"))
       : null;
 
     const mobileNumber = sessionStorage.getItem("requires2FA")
       ? loginData?.MobileNo
-      : decryptData(sessionStorage.getItem("userInfo"))?.MobileNo;
+      : decryptData(sessionStorage.getItem("userInfo"));
 
     const body = {
       MobileNumber: mobileNumber,
       UserOTP: otp.join(""),
     };
 
+    if (!body.MobileNumber || body.UserOTP?.length < 6) {
+      toast.error("kindly provide proper data");
+      return;
+    }
     try {
       const encryptedData = encryptData(body);
 
@@ -127,20 +135,24 @@ export default function VerifyMobile() {
       const result = await response.text();
 
       const responseData = decryptData(result);
-
       if (responseData?.success) {
         toast.success(responseData?.message);
         if (sessionStorage.getItem("requires2FA")) {
           navigate("/boardmeeting/companies");
           sessionStorage.removeItem("requires2FA");
+          // navigate("/boardmeeting/companies", { replace: true });
         } else {
           navigate("/boardmeeting/forgot-password");
           sessionStorage.removeItem("userInfo");
         }
+        setLoading(false);
       } else {
         toast.error(responseData?.message);
+        setLoading(false);
       }
     } catch (error) {
+      setLoading(false);
+
       console.error("Error making POST request:", error);
       toast.error("Something went wrong");
     }
@@ -149,6 +161,10 @@ export default function VerifyMobile() {
 
   useEffect(() => {
     inputRefs.current[0]?.focus();
+  }, []);
+
+  useEffect(() => {
+    otpBoxReference.current[0]?.focus();
   }, []);
   return (
     // <AuthWrapper>
@@ -289,13 +305,14 @@ export default function VerifyMobile() {
                             },
                             "&:focus": { border: "none", outline: "none" },
                           }}
-                          onClick={() => navigate("/boardmeeting/enter-mobile")}
+                          onClick={() => navigate(-1)}
                         >
                           Cancel
                         </Button>
 
-                        <Button
+                        <LoadingButton
                           fullWidth
+                          loading={loading}
                           onClick={handleSubmit}
                           variant="contained"
                           sx={{
@@ -306,8 +323,8 @@ export default function VerifyMobile() {
                             "&:focus": { border: "none", outline: "none" },
                           }}
                         >
-                          Submit
-                        </Button>
+                          Submits
+                        </LoadingButton>
                       </Box>
                     </FormControl>
                   </Grid>

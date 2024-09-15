@@ -28,6 +28,7 @@ export default function EnterMobile() {
     const body = {
       MobileNumber: String(values?.phoneNumber),
     };
+    // debugger;
     sessionStorage.setItem("userInfo", encryptData(body.MobileNumber));
     // console.log("is value", body.MobileNumber === );
     try {

@@ -243,6 +243,7 @@ export default function SignIn() {
                             </Typography>
                             <Field
                               name="email"
+                              autoFocus
                               as={BootstrapInput}
                               fullWidth
                               id="email"
