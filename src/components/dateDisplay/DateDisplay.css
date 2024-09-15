@@ -1,0 +1,47 @@
+
+
+figure.date-display-figure {
+    margin: 0px;
+    height: 70px;
+    border-radius: 10px;
+    border: #bbbbbbc9 1px solid;
+    position: relative;
+    overflow: hidden;
+  }
+
+  figure.date-display-figure:before {
+    content: '';
+    display: inline-block;
+    width: 70px;
+  }
+
+  header.date-display-header {
+    width: 75px;
+    margin-left: -2px;
+    height: 20px;
+    position: absolute;
+    top: -2px;
+    background-color: #fbb02f;
+    border-radius: 10px 10px 0 0;
+    /* border-bottom: 3px solid #e5e5e5; */
+    font: 400 12px/20px Arial, Helvetica, Geneva, sans-serif;
+    /* letter-spacing: 0.5px; */
+    color: #fff;
+    text-align: center;
+    text-transform: capitalize; /* Capitalize text */
+  }
+
+  section.date-display-day {
+    width: 70px;
+    height: 30px;
+    position: absolute;
+    top: 50%;
+transform: translateY(-50%);
+    font: 400 28px/40px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+    letter-spacing: -2px;
+    color: #4c566b;
+    text-align: center;
+    z-index: 10;
+  }
+
+

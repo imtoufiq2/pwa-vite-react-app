@@ -1,44 +1,85 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import { VitePWA } from 'vite-plugin-pwa'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import { VitePWA } from "vite-plugin-pwa";
 
-let faviconURL = '/vite.svg'
-let reactLogoURL = '/react.svg';
-let brandingLogo='/Branding_logo.png';
-let exportPdfIcon =  '/icons8-export-pdf-50.png';
+const faviconURL = "/vite.svg";
+const reactLogoURL = "/react.svg";
+const brandingLogo = "/Branding_logo.png";
+const exportPdfIcon = "/icons8-export-pdf-50.png";
 
-let offlineImage = '/offline_image.svg';
-let somethingWentWrong = '/something_went_wrong.svg';
+const offlineImage = "/offline_image.svg";
+const somethingWentWrong = "/something_went_wrong.svg";
 
-
-
-// https://vitejs.dev/config/
 export default defineConfig({
-  base: "/boardmeeting/",
+  base: "/boardmeeting",
 
   plugins: [
     react(),
     VitePWA({
-      // includeAssets: [faviconURL],
-      includeAssets: [faviconURL, reactLogoURL,brandingLogo,exportPdfIcon , offlineImage, somethingWentWrong],  // Include reactLogo in assets
-
+      includeAssets: [
+        faviconURL,
+        reactLogoURL,
+        brandingLogo,
+        exportPdfIcon,
+        offlineImage,
+        somethingWentWrong,
+      ],
       manifest: {
-        theme_color: '#ffffff',
+        name: "MOSL BoardBuddy",
+        short_name: "BoardBuddy",
+        description: "An intuitive meeting management tool for MOSL Motilal Oswal company board members.",
+        theme_color: "#fbb02f",
         icons: [
           {
-            src: faviconURL,
-            sizes: '512x512',
-            type: 'image/svg+xml',
-            purpose: 'any maskable'
+            src: faviconURL.replace(/^\//, ""),
+            sizes: "512x512",
+            type: "image/svg+xml",
+            purpose: "any maskable",
           },
           {
-            src: faviconURL,
-            sizes: '512x512',
-            type: 'image/png',
-          }
-        ]
+            src: faviconURL.replace(/^\//, ""),
+            sizes: "512x512",
+            type: "image/png",
+          },
+        ],
+        start_url: ".",
+        background_color: "#f5f6fa",
+        display: "standalone",
+        orientation: "portrait",
+        scope: "/",
+        lang: "en-US",
+        msTileColor: "#000000",
+        prefer_related_applications: false,
+        related_applications: [],
+        crosswalk: true,
+        id: "com.yourdomain.appname",
+        share: {
+          scope: "http://yoursite.com/share",
+          url: "https://yoursite.com",
+        },
+        screenshots: [
+          {
+            src: "path/to/screenshot1.jpg",
+            sizes: "640x1136",
+            type: "image/jpeg",
+          },
+          {
+            src: "path/to/screenshot2.jpg",
+            sizes: "750x1334",
+            type: "image/jpeg",
+          },
+        ],
       },
-    })
-  ]
-
-})
+    }),
+  ],
+  server: {
+    proxy: {
+      "/BoardMeetingApi": {
+        target: "https://myzonebeta.motilaloswal.com",
+        changeOrigin: true,
+        rewrite: (path) =>
+          path.replace(/^\/BoardMeetingApi/, "/BoardMeetingApi"),
+      },
+    },
+  }
+});

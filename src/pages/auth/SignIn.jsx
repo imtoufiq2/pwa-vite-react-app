@@ -1,33 +1,27 @@
-//react import
 import { useCallback, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
-
-//MUI import
-import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
 import { FormControl, IconButton, InputAdornment, Stack } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { LoadingButton } from "@mui/lab";
-
+import { BootstrapInput } from "../../utils/Input/textfield";
+import "./auth.css";
+import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-
-import "./auth.css";
-// import { useGlobalHook } from "../../Contexts";
-// import { useGlobalHook } from "../../context";
-import OnBoardingLogo from "../../components/Logo";
-import { BootstrapInput } from "../../utils/Input/textfield";
 import encryptData from "../../helpers/encryption";
 import decryptData from "../../helpers/decryption";
+import toast from "react-hot-toast";
+import { LoadingButton } from "@mui/lab";
+// import OnBoardingLogo from "../../components/logo";
+import ResponsiveImage from "../../components/Logo";
+import { useGlobalHook } from "../../context/Contexts";
 
 export default function SignIn() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  // const { darkMode } = useGlobalHook();
-  const darkMode = true;
+  const { darkMode } = useGlobalHook();
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -56,6 +50,7 @@ export default function SignIn() {
         const result = await response.text();
 
         const responseData = decryptData(result);
+
         if (responseData?.success && responseData?.message === "Successful.") {
           navigate("/boardmeeting/verify-otp");
         } else {
@@ -131,7 +126,6 @@ export default function SignIn() {
 
       const result = await response.text();
       const responseData = decryptData(result);
-
       if (responseData?.success) {
         sessionStorage.setItem("loginData", JSON.stringify(responseData?.data));
         sessionStorage.setItem(
@@ -184,20 +178,7 @@ export default function SignIn() {
         }}
       >
         <Grid container spacing={3}>
-          {/* <Grid item xs={12} textAlign="center">
-            <Box
-              component="img"
-              src={brandingLogo}
-              alt="logo"
-              sx={{
-                borderRadius: "10px",
-                width: { xs: "100px", sm: "150px" },
-                height: { xs: "auto", sm: "90px" },
-                objectFit: "inherit",
-              }}
-            />
-          </Grid> */}
-          <OnBoardingLogo />
+          <ResponsiveImage />
 
           <Grid item xs={12}>
             <Container component="main" maxWidth="2xl">

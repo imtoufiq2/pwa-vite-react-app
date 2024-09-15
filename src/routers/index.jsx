@@ -5,19 +5,18 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { ErrorBoundary } from "react-error-boundary";
-import SignIn from "../pages/auth/SignIn";
-import EnterMobile from "../pages/auth/EnterMobile";
-import ResetPassword from "../pages/auth/ResetPassword";
 import AuthGuard from "../utils/AuthGuard";
 import AssociatedCompanies from "../pages/AssociatedCompanies";
 import Department from "../pages/Department";
 import Meetings from "../pages/Meetings";
 import Reports from "../pages/Reports";
 import ViewDocument from "../pages/ViewDocument";
-import VerifyMobile from "../pages/auth/VerifyMobile";
 import FloatingFooterAction from "../components/FloatingFooterAction";
+import SignIn from "../pages/auth/SignIn";
+import VerifyMobile from "../pages/auth/VerifyMobile";
+import EnterMobile from "../pages/auth/EnterMobile";
+import ResetPassword from "../pages/auth/ResetPassword";
 // import SomethingWentWrong from "../components/SomethingWentWrong";
-// import FloatingFooterAction from "../components/floatingFooterAction";
 
 const Routers = () => {
   // const [isOnline, setIsOnline] = useState(navigator.onLine);
