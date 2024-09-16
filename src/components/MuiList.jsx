@@ -1,19 +1,30 @@
 import PropTypes from "prop-types";
 import {
   Box,
+  Fab,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
   Pagination,
+  Stack,
+  Tooltip,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+// import AddCommentIcon from "@mui/icons-material/AddComment"; // Import icon for Fab
+
 import { useLocation, useNavigate } from "react-router-dom";
 import EmptyState from "./EmptyState";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
 import { useGlobalHook } from "../context/Contexts";
+import { useTheme } from "@emotion/react";
+import FormModalExample from "./addComment";
+import ViewComments from "./viewComments";
 
 export const MuiList = ({
   showIcon,
@@ -27,6 +38,10 @@ export const MuiList = ({
   const navigate = useNavigate();
   const location = useLocation();
   const { darkMode } = useGlobalHook();
+  const theme = useTheme();
+  const isLgUp = useMediaQuery(theme.breakpoints.up("md"));
+  const [open, setOpen] = useState(false);
+  const [openView, setOpenView] = useState(false);
 
   const [page, setPage] = useState(1);
   const itemsPerPage = 10;
@@ -112,7 +127,6 @@ export const MuiList = ({
                 boxShadow: 1,
               }}
             >
-              {console.log("curdata", cur)}
               <ListItemButton>
                 {showIcon && (
                   <ListItemIcon>
@@ -147,6 +161,63 @@ export const MuiList = ({
                   }
                 />
               </ListItemButton>
+              {location.pathname.includes("/boardmeeting/reports") && (
+                <Stack
+                  zIndex={1}
+                  direction={isLgUp ? "row" : "column"}
+                  sx={{
+                    paddingRight: {
+                      xs: "4px",
+                      md: "8px",
+                    },
+                  }}
+                  spacing={1}
+                >
+                  {/* Tooltip for View Comment */}
+                  <Tooltip title="View Comment" arrow>
+                    <Fab
+                      size="small"
+                      color="secondary"
+                      aria-label="visibility"
+                      onClick={(e) => {
+                        e.preventDefault(); // Prevent default navigation or behavior
+                        e.stopPropagation(); // Stop event from bubbling up to ListItem
+                        setOpenView(true);
+                      }}
+                      style={{
+                        outline: "none",
+                        border: "none",
+                        borderRadius: "50%",
+                      }}
+                    >
+                      <VisibilityIcon sx={{ color: "orange" }} />
+                    </Fab>
+                  </Tooltip>
+
+                  {/* Tooltip for Add Comment */}
+                  <Tooltip title="Add Comment" arrow>
+                    <Fab
+                      size="small"
+                      color="secondary"
+                      aria-label="add"
+                      id="_add-icon"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setOpen(true);
+                      }}
+                      style={{
+                        outline: "none",
+                        border: "none",
+                        borderRadius: "50%",
+                        // marginTop: "4px",
+                      }}
+                    >
+                      <AddIcon sx={{ color: "orange" }} />
+                    </Fab>
+                  </Tooltip>
+                </Stack>
+              )}
             </ListItem>
           ))
         )}
@@ -173,7 +244,8 @@ export const MuiList = ({
           }}
         />
       </Box>
-      {/* asdf */}
+      <FormModalExample open={open} setOpen={setOpen} />
+      <ViewComments open={openView} setOpen={setOpenView} />
     </Box>
   );
 };

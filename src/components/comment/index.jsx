@@ -1,23 +1,13 @@
+import { useState } from "react";
 import Drawer from "../Drawer";
+import FormModalExample from "../addComment";
 
 const Comments = () => {
+  const [open, setOpen] = useState(false);
   return (
     <>
-      {/* <Fab
-        size="small"
-        color="secondary"
-        aria-label="add"
-        onClick={() => alert("safdf")}
-        sx={{
-          position: "fixed",
-          right: "10px",
-          bottom: "66px",
-        }}
-      >
-        <AddCommentIcon />
-      </Fab> */}
-
-      <Drawer />
+      <Drawer open={open} setOpen={setOpen} />
+      <FormModalExample open={open} setOpen={setOpen} />
     </>
   );
 };

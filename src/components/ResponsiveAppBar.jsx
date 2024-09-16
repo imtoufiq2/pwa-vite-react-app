@@ -13,6 +13,7 @@ import { Button, IconButton, Stack } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import { useGlobalHook } from "../context/Contexts";
+// import { useGlobalHook } from "../Contexts";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -79,18 +80,13 @@ export default function SearchAppBar({
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
-        // position="fixed"
-        position="static"
-        // position={{ xs: "static", md: "fixed" }}
+        position="fixed"
+        // position="static"
         id="_app_bar"
         sx={{
           zIndex: "1000",
           boxShadow:
             "0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.03), 0px 1px 0px 0px rgba(0,0,0,0.12)",
-          position: {
-            xs: "static", // Static for xs screens (smaller than 600px)
-            md: "fixed", // Fixed for md screens and larger (600px and above)
-          },
         }}
       >
         <Toolbar
@@ -196,14 +192,6 @@ export default function SearchAppBar({
                 {title}
               </Typography>
             </Stack>
-
-            {/* <Typography variant="h6" noWrap component="div">
-              {JSON.parse(sessionStorage.getItem("loginData"))?.username?.trim()
-                ? JSON.parse(
-                    sessionStorage.getItem("loginData")
-                  ).username.split(" ")[0]
-                : ""}
-            </Typography> */}
           </Stack>
 
           <Search
@@ -252,11 +240,11 @@ export default function SearchAppBar({
       </AppBar>
       <Box
         sx={{
-          // minHeight: "63.99px",
-          minHeight: {
-            xs: "0px",
-            md: "63.99px",
-          },
+          minHeight: "63.99px",
+          // minHeight: {
+          //   xs: "0px",
+          //   md: "63.99px",
+          // },
         }}
       ></Box>
     </Box>
