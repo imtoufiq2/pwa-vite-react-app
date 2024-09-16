@@ -1,7 +1,6 @@
 import { useCallback, useState } from "react";
 import { TextField, Box, Modal, Typography, IconButton } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import { useParams } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
 import { orange } from "@mui/material/colors";
 import encryptData from "../../helpers/encryption";
@@ -12,7 +11,6 @@ import { useGlobalHook } from "../../context/Contexts";
 // eslint-disable-next-line react/prop-types
 const FormModalExample = ({ setOpen, open }) => {
   const { darkMode } = useGlobalHook();
-  const { id } = useParams();
 
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -26,24 +24,90 @@ const FormModalExample = ({ setOpen, open }) => {
 
   const handleClose = useCallback(() => setOpen(false), [setOpen]);
 
+  // const handleSubmit = useCallback(
+  //   async (e) => {
+  //     e.preventDefault();
+  //     setLoading(true);
+
+  //     if (!validateEmail(formData.email)) {
+  //       toast.error("Invalid email format");
+  //       return;
+  //     }
+
+  //     try {
+  //       const body = {
+  //         MeetingReportID: sessionStorage.getItem("loginData") ?? "0", // bada
+  //         MeetingDetailID: sessionStorage.getItem("idr") ?? "0",
+  //         Comments: formData?.comment,
+  //         CommentedBy:
+  //           JSON.parse(sessionStorage.getItem("loginData"))?.username ?? "",
+  //         ShareTo: formData?.email,
+  //       };
+  //       const encryptedData = encryptData(body);
+
+  //       const response = await fetch(
+  //         "/BoardMeetingApi/api/Meeting/AddMeetingReportComment",
+  //         {
+  //           method: "POST",
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //             iPadId: "B9952D24-61A4-4D7F-8302-4702B5387BD5",
+  //             Authorization: `Bearer ${
+  //               JSON.parse(sessionStorage.getItem("loginData"))?.accessToken
+  //             }`,
+  //             clientCode: JSON.parse(
+  //               decryptData(sessionStorage.getItem("a3YvZ1qP"))
+  //             )?.clientCode,
+  //             "Accept-Encoding": "br",
+  //           },
+  //           body: encryptedData,
+  //         }
+  //       );
+
+  //       const result = await response.text();
+  //       const decryptedResponse = decryptData(result);
+  //       if (decryptedResponse?.success) {
+  //         handleClose();
+  //         toast.success("Comment Added!");
+  //         setFormData({
+  //           comment: "",
+  //           email: "",
+  //         });
+  //       } else {
+  //         toast.error("Something went wrong");
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //       toast.error("Something went wrong");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   },
+  //   [formData, handleClose]
+  // );
+
   const handleSubmit = useCallback(
     async (e) => {
       e.preventDefault();
       setLoading(true);
 
-      if (!validateEmail(formData.email)) {
-        toast.error("Invalid email format");
-        return;
-      }
+      // Check email validity and set the value for ShareTo
+      const email = formData.email;
+      let shareTo = "all";
 
+      if (email && validateEmail(email)) {
+        shareTo = email;
+      } else if (email && !validateEmail(email)) {
+        toast.error("Invalid email format");
+      }
       try {
         const body = {
-          MeetingReportID: id ?? "0",
+          MeetingReportID: sessionStorage.getItem("loginData") ?? "0",
           MeetingDetailID: sessionStorage.getItem("idr") ?? "0",
           Comments: formData?.comment,
           CommentedBy:
             JSON.parse(sessionStorage.getItem("loginData"))?.username ?? "",
-          ShareTo: formData?.email,
+          ShareTo: shareTo, // Set ShareTo to "all" if email is invalid or empty
         };
         const encryptedData = encryptData(body);
 
@@ -85,7 +149,7 @@ const FormModalExample = ({ setOpen, open }) => {
         setLoading(false);
       }
     },
-    [formData, id, handleClose]
+    [formData, handleClose]
   );
 
   const handleChange = (e) => {
@@ -209,7 +273,7 @@ const FormModalExample = ({ setOpen, open }) => {
             helperText={error.email}
             placeholder="Enter the recipient's email..."
             type="email"
-            required
+            // required
             sx={(theme) => ({
               mt: 2,
               "& .MuiInputLabel-root": {

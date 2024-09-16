@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import {
   Box,
@@ -18,6 +18,9 @@ import {
 import { orange } from "@mui/material/colors";
 import CloseIcon from "@mui/icons-material/Close";
 import { useGlobalHook } from "../../context/Contexts";
+import encryptData from "../../helpers/encryption";
+import decryptData from "../../helpers/decryption";
+import toast from "react-hot-toast";
 
 const ViewComments = ({ open, setOpen }) => {
   const { darkMode } = useGlobalHook();
@@ -189,14 +192,59 @@ const ViewComments = ({ open, setOpen }) => {
     fontWeight: "bold",
   };
 
+  const handleGetComments = useCallback(async () => {
+    try {
+      const body = {
+        MeetingReportID: sessionStorage.getItem("longId") ?? "0", // bada
+        MeetingDetailID: sessionStorage.getItem("idr") ?? "0", // chota
+      };
+      const encryptedData = encryptData(body);
+
+      const response = await fetch(
+        "/BoardMeetingApi/api/Meeting/AddMeetingReportComment",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            iPadId: "B9952D24-61A4-4D7F-8302-4702B5387BD5",
+            Authorization: `Bearer ${
+              JSON.parse(sessionStorage.getItem("loginData"))?.accessToken
+            }`,
+            clientCode: JSON.parse(
+              decryptData(sessionStorage.getItem("a3YvZ1qP"))
+            )?.clientCode,
+            "Accept-Encoding": "br",
+          },
+          body: encryptedData,
+        }
+      );
+
+      const result = await response.text();
+      const decryptedResponse = decryptData(result);
+      console.log({ decryptedResponse });
+      if (decryptedResponse?.success) {
+        console.log("asfd");
+        //set the data
+      } else {
+        toast.error("Something went wrong");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong");
+    }
+    // finally {
+    //   setLoading(false);
+    // }
+  }, []);
+
   useEffect(() => {
     if (!open) return;
-    // alert("call");
+    handleGetComments();
     // const body = {
     //   MeetingReportID: id ?? "0",
     //   MeetingDetailID: sessionStorage.getItem("idr") ?? "0",
     // }; //TODO use the both the id
-  }, [open]);
+  }, [handleGetComments, open]);
 
   return (
     <Modal

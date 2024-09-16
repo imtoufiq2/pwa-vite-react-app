@@ -105,6 +105,8 @@ export const MuiList = ({
                   navigate(
                     `/boardmeeting/${nextRoute}/${cur.MeetingDetailID ?? 0}`
                   );
+                  sessionStorage.setItem("longId", cur.MeetingDetailID);
+
                   if (location.pathname.includes("/reports")) {
                     sessionStorage.setItem("url", cur?.ReportPath ?? "");
                   }
@@ -161,6 +163,8 @@ export const MuiList = ({
                   }
                 />
               </ListItemButton>
+              {console.log("asfdasdfasfdsafa", cur.MeetingDetailID)}
+
               {location.pathname.includes("/boardmeeting/reports") && (
                 <Stack
                   zIndex={1}
@@ -182,6 +186,8 @@ export const MuiList = ({
                       onClick={(e) => {
                         e.preventDefault(); // Prevent default navigation or behavior
                         e.stopPropagation(); // Stop event from bubbling up to ListItem
+                        sessionStorage.setItem("longId", cur.MeetingDetailID);
+
                         setOpenView(true);
                       }}
                       style={{
@@ -204,6 +210,8 @@ export const MuiList = ({
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
+                        sessionStorage.setItem("longId", cur.MeetingDetailID);
+
                         setOpen(true);
                       }}
                       style={{
