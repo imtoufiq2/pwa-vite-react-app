@@ -1,4 +1,6 @@
+import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+
 import {
   Box,
   Modal,
@@ -17,7 +19,6 @@ import { orange } from "@mui/material/colors";
 import CloseIcon from "@mui/icons-material/Close";
 import { useGlobalHook } from "../../context/Contexts";
 
-// eslint-disable-next-line react/prop-types
 const ViewComments = ({ open, setOpen }) => {
   const { darkMode } = useGlobalHook();
   const commentsDassta = [
@@ -143,7 +144,7 @@ const ViewComments = ({ open, setOpen }) => {
     },
   ];
 
-  const [commentsData, setCommentsData] = useState(commentsDassta);
+  const [commentsData] = useState(commentsDassta);
   const [page, setPage] = useState(1);
   const itemsPerPage = 5;
 
@@ -189,7 +190,6 @@ const ViewComments = ({ open, setOpen }) => {
   };
 
   useEffect(() => {
-    // console.log("call the api");
     if (!open) return;
     // alert("call");
     // const body = {
@@ -307,5 +307,9 @@ const ViewComments = ({ open, setOpen }) => {
     </Modal>
   );
 };
-
+// Add prop types validation
+ViewComments.propTypes = {
+  open: PropTypes.bool.isRequired,
+  setOpen: PropTypes.func.isRequired,
+};
 export default ViewComments;

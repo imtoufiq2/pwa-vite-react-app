@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import { Fab, Tooltip } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
@@ -29,5 +31,8 @@ const Drawer = ({ setOpen }) => {
     </Tooltip>
   );
 };
-
+// Define prop types for the Drawer component
+Drawer.propTypes = {
+  setOpen: PropTypes.func.isRequired,
+};
 export default Drawer;

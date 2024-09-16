@@ -37,8 +37,6 @@ const FormModalExample = ({ setOpen, open }) => {
       }
 
       try {
-        console.log("Form submitted:", formData);
-
         const body = {
           MeetingReportID: id ?? "0",
           MeetingDetailID: sessionStorage.getItem("idr") ?? "0",
@@ -70,7 +68,6 @@ const FormModalExample = ({ setOpen, open }) => {
 
         const result = await response.text();
         const decryptedResponse = decryptData(result);
-        console.log({ decryptedResponse });
         if (decryptedResponse?.success) {
           handleClose();
           toast.success("Comment Added!");

@@ -66,7 +66,6 @@ export default function SearchAppBar({
   searchQuery,
   setSearchQuery,
 }) {
-  // console.log({ logo });
   const navigate = useNavigate();
   const location = useLocation();
   const inputRef = useRef(null);

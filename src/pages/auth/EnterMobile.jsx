@@ -23,14 +23,12 @@ export default function EnterMobile() {
 
   const handleSubmit = async (values, { resetForm }) => {
     // Handle form submission
-    console.log(values);
 
     const body = {
       MobileNumber: String(values?.phoneNumber),
     };
     // debugger;
     sessionStorage.setItem("userInfo", encryptData(body.MobileNumber));
-    // console.log("is value", body.MobileNumber === );
     try {
       const encryptedData = encryptData(body);
       const response = await fetch("/BoardMeetingApi/api/OTP/GenerateOTP", {

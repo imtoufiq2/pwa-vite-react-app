@@ -45,7 +45,6 @@ const ViewDocument = () => {
 
       if (responseData?.success) {
         setReportFile(responseData?.data?.ReportPath ?? "");
-        console.log("asdfasfdasfdasd", responseData ?? "");
         sessionStorage.setItem(
           "xYz123!@#d",
           encryptData(
@@ -71,10 +70,6 @@ const ViewDocument = () => {
       // throw new Error("Somethings went wrong");
     }
   }, []);
-  // console.log(
-  //   "sesssss",
-  //   JSON.parse(decryptData())
-  // );
 
   useEffect(() => {
     getReportDetails();

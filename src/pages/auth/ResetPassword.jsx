@@ -25,7 +25,6 @@ export default function ResetPassword() {
 
   const handleSubmit = async (values, { resetForm, setSubmitting }) => {
     // Handle form submission
-    console.log(values);
 
     const body = {
       MobileNumber: values?.phoneNumber,
@@ -47,8 +46,6 @@ export default function ResetPassword() {
       const result = await response.text();
 
       const responseData = decryptData(result);
-
-      console.log("responseData", responseData);
 
       if (
         responseData?.data?.Password === "Updated" &&

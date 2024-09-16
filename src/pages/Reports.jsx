@@ -22,7 +22,6 @@ const Reports = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [reportsData, setReportsData] = useState([]);
   const [loading, setLoading] = useState(false);
-  // console.log("dasfasdfasfas", id);
   useEffect(() => {
     if (!JSON.parse(sessionStorage.getItem("loginData"))?.accessToken) {
       navigate("/boardmeeting/sign-in");

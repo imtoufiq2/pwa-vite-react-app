@@ -15,7 +15,6 @@ const Contexts = ({ children }) => {
     ...initialState,
     darkMode: localDarkMode !== null ? localDarkMode : initialState.darkMode,
   });
-  console.log("hela");
 
   // Update localStorage whenever darkMode changes
   useEffect(() => {
@@ -44,11 +43,10 @@ const Contexts = ({ children }) => {
   );
 };
 
-
 // PropTypes validation
 Contexts.propTypes = {
-    children: PropTypes.node.isRequired,
-  };
+  children: PropTypes.node.isRequired,
+};
 // Global Hook
 const useGlobalHook = () => {
   return useContext(context);
