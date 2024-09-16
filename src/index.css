@@ -720,3 +720,9 @@ border: 2px solid #fbb02f;
 }
 
 
+#_box_submit .MuiFormControl-root.MuiFormControl-marginNormal.MuiFormControl-fullWidth.MuiTextField-root.css-17vbkzs-MuiFormControl-root-MuiTextField-root{
+  border-radius: 6px !important;
+}
+#_button_dark .MuiBottomNavigationAction-label.css-1drnm16-MuiBottomNavigationAction-label{
+  font-size: 16px !important;
+}
