@@ -21,133 +21,134 @@ import { useGlobalHook } from "../../context/Contexts";
 import encryptData from "../../helpers/encryption";
 import decryptData from "../../helpers/decryption";
 import toast from "react-hot-toast";
+import { formatTimestamp } from "../../helpers/formatTimestamp";
 
 const ViewComments = ({ open, setOpen }) => {
   const { darkMode } = useGlobalHook();
-  const commentsDassta = [
-    {
-      id: 1,
-      comment: "Great presentation!",
-      commentedBy: "John Doe",
-      commentedFor: "Jane Smith",
-    },
-    {
-      id: 2,
-      comment: "Excellent idea!",
-      commentedBy: "Jane Smith",
-      commentedFor: "Bob Johnson",
-    },
-    {
-      id: 3,
-      comment: "Well-said!",
-      commentedBy: "Bob Johnson",
-      commentedFor: "John Doe",
-    },
-    {
-      id: 4,
-      comment: "Thought-provoking discussion.",
-      commentedBy: "Alice Brown",
-      commentedFor: "Charlie Davis",
-    },
-    {
-      id: 5,
-      comment: "Informative session.",
-      commentedBy: "Charlie Davis",
-      commentedFor: "Alice Brown",
-    },
-    {
-      id: 6,
-      comment: "Very insightful analysis.",
-      commentedBy: "Emma Wilson",
-      commentedFor: "Daniel Lee",
-    },
-    {
-      id: 7,
-      comment: "Great use of data!",
-      commentedBy: "Michael Taylor",
-      commentedFor: "Sophia Clark",
-    },
-    {
-      id: 8,
-      comment: "I appreciate the clarity.",
-      commentedBy: "Olivia Martinez",
-      commentedFor: "James Wilson",
-    },
-    {
-      id: 9,
-      comment: "Well done on the presentation!",
-      commentedBy: "Lucas Rodriguez",
-      commentedFor: "Emily Davis",
-    },
-    {
-      id: 10,
-      comment: "Interesting points raised.",
-      commentedBy: "Ava Hernandez",
-      commentedFor: "William Lewis",
-    },
-    {
-      id: 11,
-      comment: "Very engaging session.",
-      commentedBy: "Mia Brown",
-      commentedFor: "Benjamin Walker",
-    },
-    {
-      id: 12,
-      comment: "Good job on the visuals!",
-      commentedBy: "Ethan Young",
-      commentedFor: "Isabella Hall",
-    },
-    {
-      id: 13,
-      comment: "The data was compelling.",
-      commentedBy: "Ella King",
-      commentedFor: "Alexander Scott",
-    },
-    {
-      id: 14,
-      comment: "Insightful and well-structured.",
-      commentedBy: "Jacob Wright",
-      commentedFor: "Charlotte Adams",
-    },
-    {
-      id: 15,
-      comment: "Thorough analysis and discussion.",
-      commentedBy: "Liam Nelson",
-      commentedFor: "Amelia Turner",
-    },
-    {
-      id: 16,
-      comment: "Appreciate the thorough research.",
-      commentedBy: "Mason Carter",
-      commentedFor: "Avery Phillips",
-    },
-    {
-      id: 17,
-      comment: "Effective and to the point.",
-      commentedBy: "James Evans",
-      commentedFor: "Harper Murphy",
-    },
-    {
-      id: 18,
-      comment: "Impressive presentation skills.",
-      commentedBy: "Charlotte Rivera",
-      commentedFor: "Daniel Murphy",
-    },
-    {
-      id: 19,
-      comment: "Very professional delivery.",
-      commentedBy: "Zoe Garcia",
-      commentedFor: "Logan Sanchez",
-    },
-    {
-      id: 20,
-      comment: "A well-rounded discussion.",
-      commentedBy: "Jackson Barnes",
-      commentedFor: "Sofia Cooper",
-    },
-  ];
+  // const commentsDassta = [
+  //   {
+  //     id: 1,
+  //     comment: "Great presentation!",
+  //     commentedBy: "John Doe",
+  //     commentedFor: "Jane Smith",
+  //   },
+  //   {
+  //     id: 2,
+  //     comment: "Excellent idea!",
+  //     commentedBy: "Jane Smith",
+  //     commentedFor: "Bob Johnson",
+  //   },
+  //   {
+  //     id: 3,
+  //     comment: "Well-said!",
+  //     commentedBy: "Bob Johnson",
+  //     commentedFor: "John Doe",
+  //   },
+  //   {
+  //     id: 4,
+  //     comment: "Thought-provoking discussion.",
+  //     commentedBy: "Alice Brown",
+  //     commentedFor: "Charlie Davis",
+  //   },
+  //   {
+  //     id: 5,
+  //     comment: "Informative session.",
+  //     commentedBy: "Charlie Davis",
+  //     commentedFor: "Alice Brown",
+  //   },
+  //   {
+  //     id: 6,
+  //     comment: "Very insightful analysis.",
+  //     commentedBy: "Emma Wilson",
+  //     commentedFor: "Daniel Lee",
+  //   },
+  //   {
+  //     id: 7,
+  //     comment: "Great use of data!",
+  //     commentedBy: "Michael Taylor",
+  //     commentedFor: "Sophia Clark",
+  //   },
+  //   {
+  //     id: 8,
+  //     comment: "I appreciate the clarity.",
+  //     commentedBy: "Olivia Martinez",
+  //     commentedFor: "James Wilson",
+  //   },
+  //   {
+  //     id: 9,
+  //     comment: "Well done on the presentation!",
+  //     commentedBy: "Lucas Rodriguez",
+  //     commentedFor: "Emily Davis",
+  //   },
+  //   {
+  //     id: 10,
+  //     comment: "Interesting points raised.",
+  //     commentedBy: "Ava Hernandez",
+  //     commentedFor: "William Lewis",
+  //   },
+  //   {
+  //     id: 11,
+  //     comment: "Very engaging session.",
+  //     commentedBy: "Mia Brown",
+  //     commentedFor: "Benjamin Walker",
+  //   },
+  //   {
+  //     id: 12,
+  //     comment: "Good job on the visuals!",
+  //     commentedBy: "Ethan Young",
+  //     commentedFor: "Isabella Hall",
+  //   },
+  //   {
+  //     id: 13,
+  //     comment: "The data was compelling.",
+  //     commentedBy: "Ella King",
+  //     commentedFor: "Alexander Scott",
+  //   },
+  //   {
+  //     id: 14,
+  //     comment: "Insightful and well-structured.",
+  //     commentedBy: "Jacob Wright",
+  //     commentedFor: "Charlotte Adams",
+  //   },
+  //   {
+  //     id: 15,
+  //     comment: "Thorough analysis and discussion.",
+  //     commentedBy: "Liam Nelson",
+  //     commentedFor: "Amelia Turner",
+  //   },
+  //   {
+  //     id: 16,
+  //     comment: "Appreciate the thorough research.",
+  //     commentedBy: "Mason Carter",
+  //     commentedFor: "Avery Phillips",
+  //   },
+  //   {
+  //     id: 17,
+  //     comment: "Effective and to the point.",
+  //     commentedBy: "James Evans",
+  //     commentedFor: "Harper Murphy",
+  //   },
+  //   {
+  //     id: 18,
+  //     comment: "Impressive presentation skills.",
+  //     commentedBy: "Charlotte Rivera",
+  //     commentedFor: "Daniel Murphy",
+  //   },
+  //   {
+  //     id: 19,
+  //     comment: "Very professional delivery.",
+  //     commentedBy: "Zoe Garcia",
+  //     commentedFor: "Logan Sanchez",
+  //   },
+  //   {
+  //     id: 20,
+  //     comment: "A well-rounded discussion.",
+  //     commentedBy: "Jackson Barnes",
+  //     commentedFor: "Sofia Cooper",
+  //   },
+  // ];
 
-  const [commentsData] = useState(commentsDassta);
+  const [commentsData, setCommentData] = useState([]);
   const [page, setPage] = useState(1);
   const itemsPerPage = 5;
 
@@ -190,6 +191,8 @@ const ViewComments = ({ open, setOpen }) => {
     bgcolor: orange[500],
     color: "white",
     fontWeight: "bold",
+    whiteSpace: "nowrap", // Correct the spelling here
+    textAlign: "center",
   };
 
   const handleGetComments = useCallback(async () => {
@@ -199,9 +202,8 @@ const ViewComments = ({ open, setOpen }) => {
         MeetingDetailID: sessionStorage.getItem("idr") ?? "0", // chota
       };
       const encryptedData = encryptData(body);
-
       const response = await fetch(
-        "/BoardMeetingApi/api/Meeting/AddMeetingReportComment",
+        "/BoardMeetingApi/api/Meeting/GetMeetingCommentDetails",
         {
           method: "POST",
           headers: {
@@ -225,6 +227,7 @@ const ViewComments = ({ open, setOpen }) => {
       if (decryptedResponse?.success) {
         console.log("asfd");
         //set the data
+        setCommentData(decryptedResponse?.data ?? []);
       } else {
         toast.error("Something went wrong");
       }
@@ -305,19 +308,51 @@ const ViewComments = ({ open, setOpen }) => {
                     <TableCell sx={tableHeaderStyle}>Comment</TableCell>
                     <TableCell sx={tableHeaderStyle}>Commented By</TableCell>
                     <TableCell sx={tableHeaderStyle}>Commented For</TableCell>
+                    <TableCell sx={tableHeaderStyle}>Commented On</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {paginatedComments.map((comment) => (
                     <TableRow key={comment.id}>
-                      <TableCell style={{ color: darkMode && "white" }}>
-                        {comment.comment}
+                      <TableCell
+                        style={{
+                          color: darkMode && "white",
+                          whiteSpace: "nowrap",
+                          textAlign: "center",
+                        }}
+                      >
+                        {comment.Comments ? comment.Comments : "-"}
                       </TableCell>
-                      <TableCell style={{ color: darkMode && "white" }}>
-                        {comment.commentedBy}
+                      <TableCell
+                        style={{
+                          color: darkMode && "white",
+                          whiteSpace: "nowrap",
+                          textAlign: "center",
+                        }}
+                      >
+                        {comment.CommentedBy}
                       </TableCell>
-                      <TableCell style={{ color: darkMode && "white" }}>
-                        {comment.commentedFor}
+                      <TableCell
+                        style={{
+                          color: darkMode && "white",
+                          whiteSpace: "nowrap",
+                          textAlign: "center",
+                        }}
+                      >
+                        {comment.CommentShareWith
+                          ? comment.CommentShareWith
+                          : "-"}
+                      </TableCell>
+                      <TableCell
+                        style={{
+                          color: darkMode && "white",
+                          whiteSpace: "nowrap",
+                          textAlign: "center",
+                        }}
+                      >
+                        {comment.CommentOn
+                          ? formatTimestamp(comment.CommentOn)
+                          : "-"}
                       </TableCell>
                     </TableRow>
                   ))}
