@@ -7,6 +7,24 @@ import toast from "react-hot-toast";
 
 function App() {
   const [isAndroid, setIsAndroid] = useState(false);
+  // Disable Print Screen (PrtSc)
+  useEffect(() => {
+    const handlePrintScreen = (event) => {
+      if (event.key === "PrintScreen") {
+        event.preventDefault();
+        document.getElementById("root").innerHTML =
+          "Screenshots are disabled on this application."; // Empty the #root element
+
+        toast.error("Screenshots are disabled, and the content is hidden.");
+      }
+    };
+
+    window.addEventListener("keyup", handlePrintScreen);
+
+    return () => {
+      window.removeEventListener("keyup", handlePrintScreen);
+    };
+  }, []);
 
   //this is to handle the print
   useEffect(() => {

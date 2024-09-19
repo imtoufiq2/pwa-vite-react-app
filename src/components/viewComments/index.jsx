@@ -220,7 +220,7 @@ const ViewComments = ({ open, setOpen }) => {
           body: encryptedData,
         }
       );
-
+      // debugger;
       const result = await response.text();
       const decryptedResponse = decryptData(result);
       console.log({ decryptedResponse });
@@ -228,9 +228,10 @@ const ViewComments = ({ open, setOpen }) => {
         console.log("asfd");
         //set the data
         setCommentData(decryptedResponse?.data ?? []);
-      } else {
-        toast.error("Something went wrong");
       }
+      // else {
+      //   toast.error("Something went wrong");
+      // }
     } catch (error) {
       console.error(error);
       toast.error("Something went wrong");
@@ -243,10 +244,6 @@ const ViewComments = ({ open, setOpen }) => {
   useEffect(() => {
     if (!open) return;
     handleGetComments();
-    // const body = {
-    //   MeetingReportID: id ?? "0",
-    //   MeetingDetailID: sessionStorage.getItem("idr") ?? "0",
-    // }; //TODO use the both the id
   }, [handleGetComments, open]);
 
   return (

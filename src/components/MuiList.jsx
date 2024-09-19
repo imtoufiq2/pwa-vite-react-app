@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import {
+  Badge,
   Box,
   Fab,
   List,
@@ -127,9 +128,20 @@ export const MuiList = ({
                 bgcolor: darkMode ? "#343332" : "background.paper",
                 margin: "4px 0",
                 boxShadow: 1,
+                paddingRight: isLgUp ? "0px" : "5px",
+                paddingTop: isLgUp ? "0px" : "5px",
+                "&:hover": {
+                  backgroundColor: darkMode
+                    ? "#2c2c2c"
+                    : (theme) => theme.palette.action.hover, // Adjust hover background color
+                  boxShadow: darkMode
+                    ? "0px 4px 8px rgba(0, 0, 0, 0.5)"
+                    : "0px 4px 8px rgba(0, 0, 0, 0.2)", // Corrected box shadow syntax
+                  cursor: "pointer", // Change cursor to pointer to indicate clickability
+                },
               }}
             >
-              <ListItemButton>
+              <ListItemButton id="_butn">
                 {showIcon && (
                   <ListItemIcon>
                     <img
@@ -150,6 +162,9 @@ export const MuiList = ({
                         fontWeight: "500",
                         // color: "red",
                         color: darkMode && "#ffae18",
+                        wordBreak: "break-word",
+                        overflowWrap: "break-word",
+                        whiteSpace: "normal",
                       }}
                     >
                       {location?.pathname === "/boardmeeting/companies"
@@ -163,7 +178,6 @@ export const MuiList = ({
                   }
                 />
               </ListItemButton>
-              {console.log("asfdasdfasfdsafa", cur.MeetingDetailID)}
 
               {location.pathname.includes("/boardmeeting/reports") && (
                 <Stack
@@ -196,6 +210,22 @@ export const MuiList = ({
                         borderRadius: "50%",
                       }}
                     >
+                      {/* <VisibilityIcon sx={{ color: "orange" }} /> */}
+                      <Badge
+                        id="_badge"
+                        badgeContent={12} // The count to display
+                        color="primary" // Badge color
+                        sx={{
+                          position: "absolute",
+                          top: "6px", // Adjust these values to position the badge correctly
+                          right: "4px",
+                          "& .MuiBadge-dot": {
+                            borderRadius: "50%",
+                            width: 14,
+                            height: 14,
+                          },
+                        }}
+                      ></Badge>
                       <VisibilityIcon sx={{ color: "orange" }} />
                     </Fab>
                   </Tooltip>

@@ -95,6 +95,7 @@ const FormModalExample = ({ setOpen, open }) => {
       const email = formData.email;
       let shareTo = "all";
 
+      // debugger;
       if (email && validateEmail(email)) {
         shareTo = email;
       } else if (email && !validateEmail(email)) {
@@ -102,7 +103,7 @@ const FormModalExample = ({ setOpen, open }) => {
       }
       try {
         const body = {
-          MeetingReportID: sessionStorage.getItem("loginData") ?? "0",
+          MeetingReportID: sessionStorage.getItem("longId") ?? "0",
           MeetingDetailID: sessionStorage.getItem("idr") ?? "0",
           Comments: formData?.comment,
           CommentedBy:

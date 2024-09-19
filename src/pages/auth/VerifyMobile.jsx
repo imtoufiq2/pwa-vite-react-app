@@ -323,7 +323,7 @@ export default function VerifyMobile() {
                             "&:focus": { border: "none", outline: "none" },
                           }}
                         >
-                          Submits
+                          Submit
                         </LoadingButton>
                       </Box>
                     </FormControl>

@@ -27,7 +27,8 @@ export default defineConfig({
       manifest: {
         name: "MOSL Board Connect",
         short_name: "BoardConnect",
-        description: "A comprehensive and intuitive meeting management tool for board members of MOSL (Motilal Oswal).",
+        description:
+          "A comprehensive and intuitive meeting management tool for board members of MOSL (Motilal Oswal).",
         theme_color: "#fbb02f",
         icons: [
           {
@@ -42,29 +43,29 @@ export default defineConfig({
             type: "image/png",
           },
         ],
-        start_url: ".",
+        start_url: "/boardmeeting",
         background_color: "#f5f6fa",
         display: "standalone",
         orientation: "portrait",
-        scope: "/",
+        scope: "/boardmeeting",
         lang: "en-US",
         msTileColor: "#000000",
         prefer_related_applications: false,
         related_applications: [],
         crosswalk: true,
-        id: "com.yourdomain.appname",
+        id: "com.mosl.boardconnect",
         share: {
-          scope: "http://yoursite.com/share",
-          url: "https://yoursite.com",
+          scope: "https://myzonebeta.motilaloswal.com/boardmeeting/share",
+          url: "https://myzonebeta.motilaloswal.com/boardmeeting",
         },
         screenshots: [
           {
-            src: "path/to/screenshot1.jpg",
+            src: faviconURL,
             sizes: "640x1136",
             type: "image/jpeg",
           },
           {
-            src: "path/to/screenshot2.jpg",
+            src: faviconURL,
             sizes: "750x1334",
             type: "image/jpeg",
           },
@@ -81,5 +82,5 @@ export default defineConfig({
           path.replace(/^\/BoardMeetingApi/, "/BoardMeetingApi"),
       },
     },
-  }
+  },
 });
