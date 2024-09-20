@@ -161,7 +161,10 @@ const ViewComments = ({ open, setOpen }) => {
           >
             Total Comments = {commentsData?.length ?? 0}
           </IconButton> */}
-          <Tooltip title="Add Comment" arrow>
+          <Tooltip
+            title={`Total comments is ${commentsData?.length || 0}`}
+            arrow
+          >
             <Fab
               size="small"
               color="secondary"
