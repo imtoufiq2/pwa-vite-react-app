@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import {
-  Badge,
   Box,
   Fab,
   List,
@@ -210,8 +209,8 @@ export const MuiList = ({
                         borderRadius: "50%",
                       }}
                     >
-                      {/* <VisibilityIcon sx={{ color: "orange" }} /> */}
-                      <Badge
+                      <VisibilityIcon sx={{ color: "orange" }} />
+                      {/* <Badge
                         id="_badge"
                         badgeContent={12} // The count to display
                         color="primary" // Badge color
@@ -226,7 +225,7 @@ export const MuiList = ({
                           },
                         }}
                       ></Badge>
-                      <VisibilityIcon sx={{ color: "orange" }} />
+                      <VisibilityIcon sx={{ color: "orange" }} /> */}
                     </Fab>
                   </Tooltip>
 

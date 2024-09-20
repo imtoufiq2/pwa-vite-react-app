@@ -11,7 +11,7 @@ const offlineImage = "/offline_image.svg";
 const somethingWentWrong = "/something_went_wrong.svg";
 
 export default defineConfig({
-  base: "/boardmeeting",
+  base: "boardmeeting",
 
   plugins: [
     react(),
@@ -34,13 +34,15 @@ export default defineConfig({
           {
             src: faviconURL.replace(/^\//, ""),
             sizes: "512x512",
-            type: "image/svg+xml",
+            type: "image/png", // Change to PNG if favicon is not an SVG
+
             purpose: "any maskable",
           },
           {
             src: faviconURL.replace(/^\//, ""),
             sizes: "512x512",
-            type: "image/png",
+            type: "image/png", // Change to PNG if favicon is not an SVG
+
           },
         ],
         start_url: "/boardmeeting",
@@ -60,14 +62,16 @@ export default defineConfig({
         },
         screenshots: [
           {
-            src: faviconURL,
+            src: "/favicon.png",
             sizes: "640x1136",
-            type: "image/jpeg",
+            type: "image/png", // Change to PNG if favicon is not an SVG
+
           },
           {
-            src: faviconURL,
+            src: "/favicon.png",
             sizes: "750x1334",
-            type: "image/jpeg",
+            type: "image/png", // Change to PNG if favicon is not an SVG
+
           },
         ],
       },

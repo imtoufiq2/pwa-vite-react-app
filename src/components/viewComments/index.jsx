@@ -256,27 +256,37 @@ const ViewComments = ({ open, setOpen }) => {
     >
       <Box sx={style} id="_box">
         <Box
+          id="_box"
           sx={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
           }}
         >
-          <Typography
+          {/* <Typography
             id="view-comments-modal-title"
             variant="h6"
             component="h2"
-            sx={{ visibility: commentsData?.length ? "visible" : "hidden" }}
+            sx={{ display: commentsData?.length ? "block" : "none" }}
             style={{ color: darkMode && "white" }}
           >
             View Comments
-          </Typography>
+          </Typography> */}
+          <IconButton
+            id="_icon_button"
+            disabled
+            onClick={handleClose}
+            style={{ color: orange[500], border: "none", outline: "none" }}
+          >
+            {/* <CloseIcon id="_icon" style={{ border: "none", outline: "none" }} /> */}
+            Total Comments = {commentsData?.length ?? 0}
+          </IconButton>
           <IconButton
             id="_icon_button"
             onClick={handleClose}
             style={{ color: orange[500], border: "none", outline: "none" }}
           >
-            <CloseIcon style={{ border: "none", outline: "none" }} />
+            <CloseIcon id="_icon" style={{ border: "none", outline: "none" }} />
           </IconButton>
         </Box>
         <Typography

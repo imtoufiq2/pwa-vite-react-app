@@ -47,6 +47,7 @@ const Reports = () => {
     try {
       setLoading(true);
       const encryptedData = encryptData(body);
+
       const response = await fetch(
         "/BoardMeetingApi/api/Meeting/GetMeetingDetails",
         {
