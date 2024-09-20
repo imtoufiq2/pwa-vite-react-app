@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useCallback, useEffect, useState } from "react";
-
+import MarkUnreadChatAltRoundedIcon from "@mui/icons-material/MarkUnreadChatAltRounded";
 import {
   Box,
   Modal,
@@ -14,6 +14,9 @@ import {
   TableContainer,
   Paper,
   Pagination,
+  Tooltip,
+  Fab,
+  Badge,
 } from "@mui/material";
 import { orange } from "@mui/material/colors";
 import CloseIcon from "@mui/icons-material/Close";
@@ -25,128 +28,6 @@ import { formatTimestamp } from "../../helpers/formatTimestamp";
 
 const ViewComments = ({ open, setOpen }) => {
   const { darkMode } = useGlobalHook();
-  // const commentsDassta = [
-  //   {
-  //     id: 1,
-  //     comment: "Great presentation!",
-  //     commentedBy: "John Doe",
-  //     commentedFor: "Jane Smith",
-  //   },
-  //   {
-  //     id: 2,
-  //     comment: "Excellent idea!",
-  //     commentedBy: "Jane Smith",
-  //     commentedFor: "Bob Johnson",
-  //   },
-  //   {
-  //     id: 3,
-  //     comment: "Well-said!",
-  //     commentedBy: "Bob Johnson",
-  //     commentedFor: "John Doe",
-  //   },
-  //   {
-  //     id: 4,
-  //     comment: "Thought-provoking discussion.",
-  //     commentedBy: "Alice Brown",
-  //     commentedFor: "Charlie Davis",
-  //   },
-  //   {
-  //     id: 5,
-  //     comment: "Informative session.",
-  //     commentedBy: "Charlie Davis",
-  //     commentedFor: "Alice Brown",
-  //   },
-  //   {
-  //     id: 6,
-  //     comment: "Very insightful analysis.",
-  //     commentedBy: "Emma Wilson",
-  //     commentedFor: "Daniel Lee",
-  //   },
-  //   {
-  //     id: 7,
-  //     comment: "Great use of data!",
-  //     commentedBy: "Michael Taylor",
-  //     commentedFor: "Sophia Clark",
-  //   },
-  //   {
-  //     id: 8,
-  //     comment: "I appreciate the clarity.",
-  //     commentedBy: "Olivia Martinez",
-  //     commentedFor: "James Wilson",
-  //   },
-  //   {
-  //     id: 9,
-  //     comment: "Well done on the presentation!",
-  //     commentedBy: "Lucas Rodriguez",
-  //     commentedFor: "Emily Davis",
-  //   },
-  //   {
-  //     id: 10,
-  //     comment: "Interesting points raised.",
-  //     commentedBy: "Ava Hernandez",
-  //     commentedFor: "William Lewis",
-  //   },
-  //   {
-  //     id: 11,
-  //     comment: "Very engaging session.",
-  //     commentedBy: "Mia Brown",
-  //     commentedFor: "Benjamin Walker",
-  //   },
-  //   {
-  //     id: 12,
-  //     comment: "Good job on the visuals!",
-  //     commentedBy: "Ethan Young",
-  //     commentedFor: "Isabella Hall",
-  //   },
-  //   {
-  //     id: 13,
-  //     comment: "The data was compelling.",
-  //     commentedBy: "Ella King",
-  //     commentedFor: "Alexander Scott",
-  //   },
-  //   {
-  //     id: 14,
-  //     comment: "Insightful and well-structured.",
-  //     commentedBy: "Jacob Wright",
-  //     commentedFor: "Charlotte Adams",
-  //   },
-  //   {
-  //     id: 15,
-  //     comment: "Thorough analysis and discussion.",
-  //     commentedBy: "Liam Nelson",
-  //     commentedFor: "Amelia Turner",
-  //   },
-  //   {
-  //     id: 16,
-  //     comment: "Appreciate the thorough research.",
-  //     commentedBy: "Mason Carter",
-  //     commentedFor: "Avery Phillips",
-  //   },
-  //   {
-  //     id: 17,
-  //     comment: "Effective and to the point.",
-  //     commentedBy: "James Evans",
-  //     commentedFor: "Harper Murphy",
-  //   },
-  //   {
-  //     id: 18,
-  //     comment: "Impressive presentation skills.",
-  //     commentedBy: "Charlotte Rivera",
-  //     commentedFor: "Daniel Murphy",
-  //   },
-  //   {
-  //     id: 19,
-  //     comment: "Very professional delivery.",
-  //     commentedBy: "Zoe Garcia",
-  //     commentedFor: "Logan Sanchez",
-  //   },
-  //   {
-  //     id: 20,
-  //     comment: "A well-rounded discussion.",
-  //     commentedBy: "Jackson Barnes",
-  //     commentedFor: "Sofia Cooper",
-  //   },
-  // ];
 
   const [commentsData, setCommentData] = useState([]);
   const [page, setPage] = useState(1);
@@ -272,15 +153,47 @@ const ViewComments = ({ open, setOpen }) => {
           >
             View Comments
           </Typography> */}
-          <IconButton
+          {/* <IconButton
             id="_icon_button"
             disabled
             onClick={handleClose}
             style={{ color: orange[500], border: "none", outline: "none" }}
           >
-            {/* <CloseIcon id="_icon" style={{ border: "none", outline: "none" }} /> */}
             Total Comments = {commentsData?.length ?? 0}
-          </IconButton>
+          </IconButton> */}
+          <Tooltip title="Add Comment" arrow>
+            <Fab
+              size="small"
+              color="secondary"
+              aria-label="add"
+              id="_add-icon"
+              style={{
+                outline: "none",
+                border: "none",
+                borderRadius: "50%",
+                margin: "auto",
+                // marginTop: "4px",
+              }}
+            >
+              <Badge
+                id="_badge"
+                showZero // Ensure badge shows when the content is 0
+                badgeContent={commentsData?.length ?? 0} // The count to display
+                color="primary" // Badge color
+                sx={{
+                  position: "absolute",
+                  top: "8px", // Adjust these values to position the badge correctly
+                  right: "7px",
+                  "& .MuiBadge-dot": {
+                    borderRadius: "50%",
+                    width: 14,
+                    height: 14,
+                  },
+                }}
+              ></Badge>
+              <MarkUnreadChatAltRoundedIcon sx={{ color: "orange" }} />
+            </Fab>
+          </Tooltip>
           <IconButton
             id="_icon_button"
             onClick={handleClose}
