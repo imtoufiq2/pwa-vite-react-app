@@ -1,5 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import babel from '@rollup/plugin-babel';
+
 import { VitePWA } from "vite-plugin-pwa";
 
 const faviconURL = "/favicon.png";
@@ -14,6 +16,11 @@ export default defineConfig({
   base: "boardmeeting",
   plugins: [
     react(),
+    babel({
+      babelHelpers: 'bundled',
+      extensions: ['.js', '.jsx'],
+      exclude: 'node_modules/**'
+    }),
     VitePWA({
       includeAssets: [
         faviconURL,
@@ -76,5 +83,7 @@ export default defineConfig({
       },
     }),
   ],
-
+  build: {
+    target: ['es2015', 'ios13']
+  }
 });
