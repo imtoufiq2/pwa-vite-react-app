@@ -16,6 +16,7 @@ import decryptData from "../../helpers/decryption";
 import toast from "react-hot-toast";
 import { useGlobalHook } from "../../context/Contexts";
 import ResponsiveImage from "../../components/Logo";
+import { baseUrl } from "../../App";
 
 export default function ResetPassword() {
   const navigate = useNavigate();
@@ -34,14 +35,17 @@ export default function ResetPassword() {
     try {
       const encryptedData = encryptData(body);
 
-      const response = await fetch("/BoardMeetingApi/api/OTP/ResetPassword", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          iPadId: "B9952D24-61A4-4D7F-8302-4702B5387BD5",
-        },
-        body: encryptedData,
-      });
+      const response = await fetch(
+        `${baseUrl}/BoardMeetingApi/api/OTP/ResetPassword`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            iPadId: "B9952D24-61A4-4D7F-8302-4702B5387BD5",
+          },
+          body: encryptedData,
+        }
+      );
 
       const result = await response.text();
 

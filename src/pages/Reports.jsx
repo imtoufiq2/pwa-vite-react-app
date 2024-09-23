@@ -13,6 +13,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import pdfLogo from "/icons8-export-pdf-50.png";
 
 import DarkMode from "../components/DarkMode";
+import { baseUrl } from "../App";
 
 const Reports = () => {
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ const Reports = () => {
       const encryptedData = encryptData(body);
 
       const response = await fetch(
-        "/BoardMeetingApi/api/Meeting/GetMeetingDetails",
+        `${baseUrl}/BoardMeetingApi/api/Meeting/GetMeetingDetails`,
         {
           method: "POST",
           headers: {

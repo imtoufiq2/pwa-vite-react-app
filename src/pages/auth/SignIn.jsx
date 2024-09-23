@@ -17,6 +17,7 @@ import { LoadingButton } from "@mui/lab";
 // import OnBoardingLogo from "../../components/logo";
 import ResponsiveImage from "../../components/Logo";
 import { useGlobalHook } from "../../context/Contexts";
+import { baseUrl } from "../../App";
 
 export default function SignIn() {
   const navigate = useNavigate();
@@ -38,14 +39,17 @@ export default function SignIn() {
 
       try {
         const encryptedData = encryptData(body);
-        const response = await fetch("/BoardMeetingApi/api/OTP/GenerateOTP", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            iPadId: "B9952D24-61A4-4D7F-8302-4702B5387BD5",
-          },
-          body: encryptedData,
-        });
+        const response = await fetch(
+          `${baseUrl}/BoardMeetingApi/api/OTP/GenerateOTP`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              iPadId: "B9952D24-61A4-4D7F-8302-4702B5387BD5",
+            },
+            body: encryptedData,
+          }
+        );
 
         const result = await response.text();
 
@@ -70,7 +74,7 @@ export default function SignIn() {
           Input,
         });
         const response = await fetch(
-          "/BoardMeetingApi/api/Login/Get2FASetting",
+          `${baseUrl}/BoardMeetingApi/api/Login/Get2FASetting`,
           {
             method: "POST",
             headers: {
@@ -115,14 +119,17 @@ export default function SignIn() {
     try {
       const encryptedData = encryptData(body);
 
-      const response = await fetch("/BoardMeetingApi/api/Login/authorize", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          iPadId: "B9952D24-61A4-4D7F-8302-4702B5387BD5",
-        },
-        body: encryptedData,
-      });
+      const response = await fetch(
+        `${baseUrl}/BoardMeetingApi/api/Login/authorize`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            iPadId: "B9952D24-61A4-4D7F-8302-4702B5387BD5",
+          },
+          body: encryptedData,
+        }
+      );
 
       const result = await response.text();
       const responseData = decryptData(result);

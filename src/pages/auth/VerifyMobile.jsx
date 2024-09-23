@@ -13,6 +13,7 @@ import decryptData from "../../helpers/decryption";
 import toast from "react-hot-toast";
 import ResponsiveImage from "../../components/Logo";
 import { LoadingButton } from "@mui/lab";
+import { baseUrl } from "../../App";
 
 const numberOfDigits = 6;
 export default function VerifyMobile() {
@@ -123,14 +124,17 @@ export default function VerifyMobile() {
     try {
       const encryptedData = encryptData(body);
 
-      const response = await fetch("/BoardMeetingApi/api/OTP/AuthenticateOTP", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          iPadId: "B9952D24-61A4-4D7F-8302-4702B5387BD5",
-        },
-        body: encryptedData,
-      });
+      const response = await fetch(
+        `${baseUrl}/BoardMeetingApi/api/OTP/AuthenticateOTP`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            iPadId: "B9952D24-61A4-4D7F-8302-4702B5387BD5",
+          },
+          body: encryptedData,
+        }
+      );
 
       const result = await response.text();
 

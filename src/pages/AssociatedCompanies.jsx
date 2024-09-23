@@ -13,6 +13,7 @@ import { slideInRight } from "../helpers/animations";
 import { useNavigate } from "react-router-dom";
 import DarkMode from "../components/DarkMode";
 import Loader from "../components/loader/Loader";
+import { baseUrl } from "../App";
 
 const AssociatedCompanies = () => {
   const navigate = useNavigate();
@@ -67,7 +68,7 @@ const AssociatedCompanies = () => {
       setLoading(true);
       const encryptedData = encryptData(body);
       const response = await fetch(
-        "/BoardMeetingApi/api/Meeting/Getcommittee",
+        `${baseUrl}/BoardMeetingApi/api/Meeting/Getcommittee`,
         {
           method: "POST",
           headers: {

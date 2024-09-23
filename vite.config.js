@@ -12,7 +12,6 @@ const somethingWentWrong = "/something_went_wrong.svg";
 
 export default defineConfig({
   base: "boardmeeting",
-
   plugins: [
     react(),
     VitePWA({
@@ -77,14 +76,5 @@ export default defineConfig({
       },
     }),
   ],
-  server: {
-    proxy: {
-      "/BoardMeetingApi": {
-        target: "https://myzonebeta.motilaloswal.com",
-        changeOrigin: true,
-        rewrite: (path) =>
-          path.replace(/^\/BoardMeetingApi/, "/BoardMeetingApi"),
-      },
-    },
-  },
+
 });
