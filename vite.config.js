@@ -8,6 +8,7 @@ const exportPdfIcon = "/icons8-export-pdf-50.png";
 
 export const baseUrl = "https://myzonehr.motilaloswal.com/boardmeetingapi";
 export const deployedUrl="https://myzonehr.motilaloswal.com/BoardMeetingApp"
+//  export const deployedUrl="https://organizer.fitizenindia.com/BoardMeetingApp"
 
 const offlineImage = "/offline_image.svg";
 const somethingWentWrong = "/something_went_wrong.svg";
@@ -64,7 +65,6 @@ export default defineConfig({
         id: "com.mosl.boardconnect",
         share: {
           // scope: `${baseUrl}/share`, // Updated scope with baseUrl
-
           scope:`${baseUrl}/share`,
           url: baseUrl,
         },
@@ -83,6 +83,8 @@ export default defineConfig({
           },
         ],
       },
+      registerType: 'autoUpdate',
+
     }),
   ],
 

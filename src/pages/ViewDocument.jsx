@@ -11,13 +11,20 @@ import { slideInRight } from "../helpers/animations";
 import { getDecryptedPDFForJWT } from "../helpers/pdfDecryption";
 import DarkMode from "../components/DarkMode";
 import { baseUrl } from "../App";
+import { useParams } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const ViewDocument = () => {
   const [loading, setLoading] = useState(false);
   const [reportFile, setReportFile] = useState("");
+  const { id } = useParams();
 
   const getReportDetails = useCallback(async () => {
-    const body = { meetingDetailId: 4417 };
+    if (!id) {
+      toast.error("Id is missing");
+      return;
+    }
+    const body = { meetingDetailId: id ?? "0" };
     try {
       setLoading(true);
       const encryptedData = encryptData(body);
@@ -28,6 +35,8 @@ const ViewDocument = () => {
           headers: {
             "Content-Type": "application/json",
             iPadId: "B9952D24-61A4-4D7F-8302-4702B5387BD5",
+            "Cache-Control": "no-cache",
+            Pragma: "no-cache",
             Authorization: `Bearer ${
               JSON.parse(sessionStorage.getItem("loginData"))?.accessToken
             }`,

@@ -120,6 +120,8 @@ const FormModalExample = ({ setOpen, open }) => {
             headers: {
               "Content-Type": "application/json",
               iPadId: "B9952D24-61A4-4D7F-8302-4702B5387BD5",
+              "Cache-Control": "no-cache",
+              Pragma: "no-cache",
               Authorization: `Bearer ${
                 JSON.parse(sessionStorage.getItem("loginData"))?.accessToken
               }`,
