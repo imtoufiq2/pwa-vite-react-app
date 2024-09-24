@@ -8,6 +8,7 @@ import { Fab } from "@mui/material";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import { useGlobalHook } from "../context/Contexts";
+import { baseStr } from "../routers";
 
 export default function FloatingFooterAction() {
   const navigate = useNavigate();
@@ -15,10 +16,10 @@ export default function FloatingFooterAction() {
   const [value, setValue] = React.useState(1);
   const { darkMode } = useGlobalHook();
   const noShow = [
-    "/boardmeeting/sign-in",
-    "/boardmeeting/verify-otp",
-    "/boardmeeting/enter-mobile",
-    "/boardmeeting/forgot-password",
+    `${baseStr}/sign-in`,
+    `${baseStr}/verify-otp`,
+    `${baseStr}/enter-mobile`,
+    `${baseStr}/forgot-password`,
   ];
   const hidePrivateIcon = noShow.some((path) =>
     location?.pathname.includes(path)
@@ -77,7 +78,7 @@ export default function FloatingFooterAction() {
             style={{ border: "none", outline: "none" }}
             label="Logout"
             onClick={() => {
-              navigate("/boardmeeting/sign-in");
+              navigate(`${baseStr}/sign-in`);
               sessionStorage.clear();
             }}
             icon={<ExitToAppRoundedIcon />}
@@ -106,8 +107,8 @@ export default function FloatingFooterAction() {
           /> */}
           <BottomNavigationAction
             id="_home_nav_button"
-            onClick={() => navigate("/boardmeeting/companies")}
-            disabled={location.pathname !== "/boardmeeting/companies"}
+            onClick={() => navigate(`${baseStr}/companies`)}
+            disabled={location.pathname !== `${baseStr}/companies`}
             sx={{
               display: hidePrivateIcon ? "none" : "flex",
               border: "none",
@@ -121,15 +122,15 @@ export default function FloatingFooterAction() {
                   border: "none",
                   outline: "none",
                   backgroundColor:
-                    location.pathname !== "/boardmeeting/companies"
+                    location.pathname !== `${baseStr}/companies`
                       ? "#e0e0e0"
                       : "", // Light gray when disabled
                   color:
-                    location.pathname !== "/boardmeeting/companies"
+                    location.pathname !== `${baseStr}/companies`
                       ? "#ffffff"
                       : "orange", // White icon when disabled
                 }}
-                disabled={location.pathname !== "/boardmeeting/companies"}
+                disabled={location.pathname !== `${baseStr}/companies`}
               >
                 <HomeRoundedIcon />
               </Fab>

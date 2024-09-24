@@ -5,6 +5,9 @@ import Routers from "./routers";
 import ThemeCustomization from "./themes";
 import toast from "react-hot-toast";
 
+export const baseUrl = "https://myzonehr.motilaloswal.com/boardmeetingapi";
+// export const baseUrl = "https://myzonebeta.motilaloswal.com/BoardMeetingApi";
+
 function App() {
   const [isAndroid, setIsAndroid] = useState(false);
   // Disable Print Screen (PrtSc)

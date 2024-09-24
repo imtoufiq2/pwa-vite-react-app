@@ -13,6 +13,8 @@ import Loader from "../components/loader/Loader";
 import { useNavigate, useParams } from "react-router-dom";
 import { slideInRight } from "../helpers/animations";
 import DarkMode from "../components/DarkMode";
+import { baseUrl } from "../App";
+import { baseStr } from "../routers";
 
 const Meetings = () => {
   const navigate = useNavigate();
@@ -24,7 +26,7 @@ const Meetings = () => {
 
   useEffect(() => {
     if (!JSON.parse(sessionStorage.getItem("loginData"))?.accessToken) {
-      navigate("/boardmeeting/sign-in");
+      navigate(`${baseStr}/sign-in`);
       return;
     }
   }, [navigate]);
@@ -62,7 +64,7 @@ const Meetings = () => {
     try {
       setLoading(true);
       const encryptedData = encryptData(body);
-      const response = await fetch("/BoardMeetingApi/api/Meeting/GetMeetings", {
+      const response = await fetch(`${baseUrl}/api/Meeting/GetMeetings`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

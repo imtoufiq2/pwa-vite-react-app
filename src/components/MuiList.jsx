@@ -25,6 +25,7 @@ import { useGlobalHook } from "../context/Contexts";
 import { useTheme } from "@emotion/react";
 import FormModalExample from "./addComment";
 import ViewComments from "./viewComments";
+import { baseStr } from "../routers";
 
 export const MuiList = ({
   showIcon,
@@ -96,14 +97,12 @@ export const MuiList = ({
               disablePadding
               onClick={() => {
                 if (cur.CompanyID) {
-                  navigate(`/boardmeeting/${nextRoute}/${cur.CompanyID ?? 0}`);
+                  navigate(`${baseStr}/${nextRoute}/${cur.CompanyID ?? 0}`);
                 } else if (cur.CommitteeID) {
-                  navigate(
-                    `/boardmeeting/${nextRoute}/${cur.CommitteeID ?? 0}`
-                  );
+                  navigate(`${baseStr}/${nextRoute}/${cur.CommitteeID ?? 0}`);
                 } else {
                   navigate(
-                    `/boardmeeting/${nextRoute}/${cur.MeetingDetailID ?? 0}`
+                    `${baseStr}/${nextRoute}/${cur.MeetingDetailID ?? 0}`
                   );
                   sessionStorage.setItem("longId", cur.MeetingDetailID);
 
@@ -166,11 +165,11 @@ export const MuiList = ({
                         whiteSpace: "normal",
                       }}
                     >
-                      {location?.pathname === "/boardmeeting/companies"
+                      {location?.pathname === `${baseStr}/companies`
                         ? cur?.CompanyName
-                        : location.pathname.includes("/boardmeeting/reports")
+                        : location.pathname.includes(`${baseStr}/reports`)
                         ? cur?.ReportName
-                        : location.pathname.includes("/boardmeeting/department")
+                        : location.pathname.includes(`${baseStr}/department`)
                         ? cur.CommitteeName
                         : cur.name}
                     </Typography>
@@ -178,7 +177,7 @@ export const MuiList = ({
                 />
               </ListItemButton>
 
-              {location.pathname.includes("/boardmeeting/reports") && (
+              {location.pathname.includes(`${baseStr}/reports`) && (
                 <Stack
                   zIndex={1}
                   direction={isLgUp ? "row" : "column"}

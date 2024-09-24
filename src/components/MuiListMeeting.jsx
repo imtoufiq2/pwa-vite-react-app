@@ -16,6 +16,7 @@ import getTimeFromDateTime from "../helpers/timeFromDateTime";
 import getDateDetails from "../helpers/getDateDetails";
 import { useState } from "react";
 import { useGlobalHook } from "../context/Contexts";
+import { baseStr } from "../routers";
 
 export const MuiListMeeting = ({ listToShow, setSearchQuery, searchQuery }) => {
   const navigate = useNavigate();
@@ -71,7 +72,7 @@ export const MuiListMeeting = ({ listToShow, setSearchQuery, searchQuery }) => {
           paginatedList?.map((item) => (
             <ListItem
               onClick={() =>
-                navigate(`/boardmeeting/reports/${item.MeetingID ?? 0}`)
+                navigate(`${baseStr}/reports/${item.MeetingID ?? 0}`)
               }
               key={item.id}
               style={{

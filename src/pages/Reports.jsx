@@ -13,6 +13,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import pdfLogo from "/icons8-export-pdf-50.png";
 
 import DarkMode from "../components/DarkMode";
+import { baseUrl } from "../App";
+import { baseStr } from "../routers";
 
 const Reports = () => {
   const navigate = useNavigate();
@@ -24,7 +26,7 @@ const Reports = () => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (!JSON.parse(sessionStorage.getItem("loginData"))?.accessToken) {
-      navigate("/boardmeeting/sign-in");
+      navigate(`${baseStr}/sign-in`);
       return;
     }
   }, [navigate]);
@@ -48,24 +50,21 @@ const Reports = () => {
       setLoading(true);
       const encryptedData = encryptData(body);
 
-      const response = await fetch(
-        "/BoardMeetingApi/api/Meeting/GetMeetingDetails",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            iPadId: "B9952D24-61A4-4D7F-8302-4702B5387BD5",
-            Authorization: `Bearer ${
-              JSON.parse(sessionStorage.getItem("loginData"))?.accessToken
-            }`,
-            clientCode: JSON.parse(
-              decryptData(sessionStorage.getItem("a3YvZ1qP"))
-            )?.clientCode,
-            "Accept-Encoding": "br",
-          },
-          body: encryptedData,
-        }
-      );
+      const response = await fetch(`${baseUrl}/api/Meeting/GetMeetingDetails`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          iPadId: "B9952D24-61A4-4D7F-8302-4702B5387BD5",
+          Authorization: `Bearer ${
+            JSON.parse(sessionStorage.getItem("loginData"))?.accessToken
+          }`,
+          clientCode: JSON.parse(
+            decryptData(sessionStorage.getItem("a3YvZ1qP"))
+          )?.clientCode,
+          "Accept-Encoding": "br",
+        },
+        body: encryptedData,
+      });
       // Handle non-JSON responses
       const result = await response.text();
 

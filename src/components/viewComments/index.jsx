@@ -25,6 +25,7 @@ import encryptData from "../../helpers/encryption";
 import decryptData from "../../helpers/decryption";
 import toast from "react-hot-toast";
 import { formatTimestamp } from "../../helpers/formatTimestamp";
+import { baseUrl } from "../../App";
 
 const ViewComments = ({ open, setOpen }) => {
   const { darkMode } = useGlobalHook();
@@ -84,7 +85,7 @@ const ViewComments = ({ open, setOpen }) => {
       };
       const encryptedData = encryptData(body);
       const response = await fetch(
-        "/BoardMeetingApi/api/Meeting/GetMeetingCommentDetails",
+        `${baseUrl}/api/Meeting/GetMeetingCommentDetails`,
         {
           method: "POST",
           headers: {

@@ -17,6 +17,9 @@ import { LoadingButton } from "@mui/lab";
 // import OnBoardingLogo from "../../components/logo";
 import ResponsiveImage from "../../components/Logo";
 import { useGlobalHook } from "../../context/Contexts";
+import { baseUrl } from "../../App";
+import { baseStr } from "../../routers";
+import { base64Encode } from "../../helpers/passwordEncptDecrpt";
 
 export default function SignIn() {
   const navigate = useNavigate();
@@ -38,7 +41,7 @@ export default function SignIn() {
 
       try {
         const encryptedData = encryptData(body);
-        const response = await fetch("/BoardMeetingApi/api/OTP/GenerateOTP", {
+        const response = await fetch(`${baseUrl}/api/OTP/GenerateOTP`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -52,7 +55,7 @@ export default function SignIn() {
         const responseData = decryptData(result);
 
         if (responseData?.success && responseData?.message === "Successful.") {
-          navigate("/boardmeeting/verify-otp");
+          navigate(`${baseStr}/verify-otp`);
         } else {
           toast.error(responseData?.message || "something went wrong");
         }
@@ -69,17 +72,14 @@ export default function SignIn() {
         const encryptedData = encryptData({
           Input,
         });
-        const response = await fetch(
-          "/BoardMeetingApi/api/Login/Get2FASetting",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              iPadId: "B9952D24-61A4-4D7F-8302-4702B5387BD5",
-            },
-            body: encryptedData,
-          }
-        );
+        const response = await fetch(`${baseUrl}/api/Login/Get2FASetting`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            iPadId: "B9952D24-61A4-4D7F-8302-4702B5387BD5",
+          },
+          body: encryptedData,
+        });
 
         const result = await response.text();
         const responseData = decryptData(result);
@@ -90,7 +90,7 @@ export default function SignIn() {
           sessionStorage.setItem("requires2FA", "true");
           await handleSendOtp(mobileNumber);
         } else {
-          navigate("/boardmeeting/companies");
+          navigate(`${baseStr}/companies`);
           // resetForm();
         }
       } catch (error) {
@@ -108,14 +108,14 @@ export default function SignIn() {
       // clientCode: "kailash.purohit@motilaloswal.com",
       // password: "bW9zbEAxMjM0",
       clientCode: values?.email,
-      password: values?.password,
+      password: base64Encode(values?.password),
       clientToken: "",
     };
 
     try {
       const encryptedData = encryptData(body);
 
-      const response = await fetch("/BoardMeetingApi/api/Login/authorize", {
+      const response = await fetch(`${baseUrl}/api/Login/authorize`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -126,6 +126,8 @@ export default function SignIn() {
 
       const result = await response.text();
       const responseData = decryptData(result);
+      console.log({ responseData });
+      // debugger;
       if (responseData?.success) {
         sessionStorage.setItem("loginData", JSON.stringify(responseData?.data));
         sessionStorage.setItem(
@@ -331,7 +333,7 @@ export default function SignIn() {
                           item
                           xs={6}
                           alignItems="flex-end"
-                          onClick={() => navigate("/boardmeeting/enter-mobile")}
+                          onClick={() => navigate(`${baseStr}/enter-mobile`)}
                         >
                           <Link
                             component="button"

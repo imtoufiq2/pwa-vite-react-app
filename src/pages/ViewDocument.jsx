@@ -10,6 +10,7 @@ import Loader from "../components/loader/Loader";
 import { slideInRight } from "../helpers/animations";
 import { getDecryptedPDFForJWT } from "../helpers/pdfDecryption";
 import DarkMode from "../components/DarkMode";
+import { baseUrl } from "../App";
 
 const ViewDocument = () => {
   const [loading, setLoading] = useState(false);
@@ -21,7 +22,7 @@ const ViewDocument = () => {
       setLoading(true);
       const encryptedData = encryptData(body);
       const response = await fetch(
-        "/BoardMeetingApi/api/Meeting/GetReportPathDetails",
+        `${baseUrl}/api/Meeting/GetReportPathDetails`,
         {
           method: "POST",
           headers: {

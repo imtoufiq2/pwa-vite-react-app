@@ -13,6 +13,8 @@ import decryptData from "../../helpers/decryption";
 import toast from "react-hot-toast";
 import ResponsiveImage from "../../components/Logo";
 import { LoadingButton } from "@mui/lab";
+import { baseUrl } from "../../App";
+import { baseStr } from "../../routers";
 
 const numberOfDigits = 6;
 export default function VerifyMobile() {
@@ -123,7 +125,7 @@ export default function VerifyMobile() {
     try {
       const encryptedData = encryptData(body);
 
-      const response = await fetch("/BoardMeetingApi/api/OTP/AuthenticateOTP", {
+      const response = await fetch(`${baseUrl}/api/OTP/AuthenticateOTP`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -138,11 +140,10 @@ export default function VerifyMobile() {
       if (responseData?.success) {
         toast.success(responseData?.message);
         if (sessionStorage.getItem("requires2FA")) {
-          navigate("/boardmeeting/companies");
+          navigate(`${baseStr}/companies`);
           sessionStorage.removeItem("requires2FA");
-          // navigate("/boardmeeting/companies", { replace: true });
         } else {
-          navigate("/boardmeeting/forgot-password");
+          navigate(`${baseStr}/forgot-password`);
           sessionStorage.removeItem("userInfo");
         }
         setLoading(false);

@@ -7,6 +7,7 @@ import encryptData from "../../helpers/encryption";
 import decryptData from "../../helpers/decryption";
 import toast from "react-hot-toast";
 import { useGlobalHook } from "../../context/Contexts";
+import { baseUrl } from "../../App";
 
 // eslint-disable-next-line react/prop-types
 const FormModalExample = ({ setOpen, open }) => {
@@ -113,7 +114,7 @@ const FormModalExample = ({ setOpen, open }) => {
         const encryptedData = encryptData(body);
 
         const response = await fetch(
-          "/BoardMeetingApi/api/Meeting/AddMeetingReportComment",
+          `${baseUrl}/api/Meeting/AddMeetingReportComment`,
           {
             method: "POST",
             headers: {

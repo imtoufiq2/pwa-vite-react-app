@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { baseStr } from "../routers";
 
 // eslint-disable-next-line react/prop-types
 function AuthGuard({ children }) {
@@ -8,7 +9,7 @@ function AuthGuard({ children }) {
   const token = JSON.parse(sessionStorage.getItem("loginData"))?.accessToken;
   useEffect(() => {
     if (!token) {
-      navigate("/boardmeeting/sign-in", { replace: true });
+      navigate(`${baseStr}/sign-in`, { replace: true });
     }
 
   }, [token, navigate]);

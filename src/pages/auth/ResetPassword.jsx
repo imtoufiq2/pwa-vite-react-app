@@ -16,6 +16,9 @@ import decryptData from "../../helpers/decryption";
 import toast from "react-hot-toast";
 import { useGlobalHook } from "../../context/Contexts";
 import ResponsiveImage from "../../components/Logo";
+import { baseUrl } from "../../App";
+import { baseStr } from "../../routers";
+import { base64Encode } from "../../helpers/passwordEncptDecrpt";
 
 export default function ResetPassword() {
   const navigate = useNavigate();
@@ -28,13 +31,13 @@ export default function ResetPassword() {
 
     const body = {
       MobileNumber: values?.phoneNumber,
-      Password: values?.password,
+      Password: base64Encode(values?.password),
     };
 
     try {
       const encryptedData = encryptData(body);
 
-      const response = await fetch("/BoardMeetingApi/api/OTP/ResetPassword", {
+      const response = await fetch(`${baseUrl}/api/OTP/ResetPassword`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -54,7 +57,7 @@ export default function ResetPassword() {
       ) {
         toast.success(responseData?.message);
         resetForm();
-        navigate("/boardmeeting/sign-in");
+        navigate(`${baseStr}/sign-in`);
       } else {
         toast.error(responseData?.message);
       }
@@ -292,9 +295,7 @@ export default function ResetPassword() {
                                     outline: "none",
                                   },
                                 }}
-                                onClick={() =>
-                                  navigate("/boardmeeting/sign-in")
-                                }
+                                onClick={() => navigate(`${baseStr}/sign-in`)}
                               >
                                 Cancel
                               </Button>

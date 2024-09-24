@@ -10,6 +10,7 @@ import { groupDataByCompany } from "../helpers/groupDataByCompany";
 import Loader from "../components/loader/Loader";
 import { slideInRight } from "../helpers/animations";
 import DarkMode from "../components/DarkMode";
+import { baseStr } from "../routers";
 
 const Department = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const Department = () => {
 
   useEffect(() => {
     if (!JSON.parse(sessionStorage.getItem("loginData"))?.accessToken) {
-      navigate("/boardmeeting/sign-in");
+      navigate(`${baseStr}/sign-in`);
       return;
     }
   }, [navigate]);

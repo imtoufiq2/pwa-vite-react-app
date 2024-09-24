@@ -13,6 +13,7 @@ import { Button, IconButton, Stack } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import { useGlobalHook } from "../context/Contexts";
+import { baseStr } from "../routers";
 // import { useGlobalHook } from "../Contexts";
 
 const Search = styled("div")(({ theme }) => ({
@@ -106,7 +107,7 @@ export default function SearchAppBar({
             flexGrow={1}
             alignItems="center"
           >
-            {location?.pathname !== "/boardmeeting/companies" && (
+            {location?.pathname !== `${baseStr}/companies` && (
               <>
                 <IconButton
                   id="_icon_btn"
@@ -180,7 +181,7 @@ export default function SearchAppBar({
                 justifyContent: "center",
                 gap: "8px",
                 paddingRight:
-                  location?.pathname !== "/boardmeeting/companies"
+                  location?.pathname !== `${baseStr}/companies`
                     ? "38px"
                     : "0px",
               }}

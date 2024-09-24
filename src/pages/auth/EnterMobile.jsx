@@ -16,6 +16,8 @@ import encryptData from "../../helpers/encryption";
 import decryptData from "../../helpers/decryption";
 import toast from "react-hot-toast";
 import { useGlobalHook } from "../../context/Contexts";
+import { baseUrl } from "../../App";
+import { baseStr } from "../../routers";
 
 export default function EnterMobile() {
   const navigate = useNavigate();
@@ -31,7 +33,7 @@ export default function EnterMobile() {
     sessionStorage.setItem("userInfo", encryptData(body.MobileNumber));
     try {
       const encryptedData = encryptData(body);
-      const response = await fetch("/BoardMeetingApi/api/OTP/GenerateOTP", {
+      const response = await fetch(`${baseUrl}/api/OTP/GenerateOTP`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,7 +47,7 @@ export default function EnterMobile() {
       const responseData = decryptData(result);
 
       if (responseData?.success && responseData?.message === "Successful.") {
-        navigate("/boardmeeting/verify-otp");
+        navigate(`${baseStr}/verify-otp`);
         resetForm();
       } else {
         toast.error(responseData?.message || "something went wrong");
@@ -226,9 +228,7 @@ export default function EnterMobile() {
                                     outline: "none",
                                   },
                                 }}
-                                onClick={() =>
-                                  navigate("/boardmeeting/sign-in")
-                                }
+                                onClick={() => navigate(`${baseStr}/sign-in`)}
                               >
                                 Cancel
                               </Button>

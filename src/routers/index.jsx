@@ -17,7 +17,7 @@ import VerifyMobile from "../pages/auth/VerifyMobile";
 import EnterMobile from "../pages/auth/EnterMobile";
 import ResetPassword from "../pages/auth/ResetPassword";
 // import SomethingWentWrong from "../components/SomethingWentWrong";
-const baseStr = "/boardmeeting";
+export const baseStr = "/BoardMeetingApp";
 const Routers = () => {
   // const [isOnline, setIsOnline] = useState(navigator.onLine);
   // useEffect(() => {
@@ -46,6 +46,7 @@ const Routers = () => {
   const appLayout = createBrowserRouter([
     {
       path: `${baseStr}/`,
+      // path: ``,
       element: <LayoutWithFooter />,
       children: [
         {

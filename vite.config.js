@@ -1,17 +1,19 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
-
 const faviconURL = "/favicon.png";
 const reactLogoURL = "/react.svg";
 const brandingLogo = "/Branding_logo.png";
 const exportPdfIcon = "/icons8-export-pdf-50.png";
 
+export const baseUrl = "https://myzonehr.motilaloswal.com/boardmeetingapi";
+export const deployedUrl="https://myzonehr.motilaloswal.com/BoardMeetingApp"
+
 const offlineImage = "/offline_image.svg";
 const somethingWentWrong = "/something_went_wrong.svg";
 
 export default defineConfig({
-  base: "boardmeeting",
+  base: "BoardMeetingApp",
 
   plugins: [
     react(),
@@ -45,11 +47,15 @@ export default defineConfig({
 
           },
         ],
-        start_url: "/boardmeeting",
+        // start_url: "/boardmeeting",
+        // start_url: "https://myzonehr.motilaloswal.com/BoardMeetingApp/sign-in",
+        start_url: `${deployedUrl}/sign-in`,
         background_color: "#f5f6fa",
         display: "standalone",
         orientation: "portrait",
-        scope: "/boardmeeting",
+        // scope: "/boardmeeting",
+        // scope: "https://myzonehr.motilaloswal.com/BoardMeetingApp",
+        scope: deployedUrl,
         lang: "en-US",
         msTileColor: "#000000",
         prefer_related_applications: false,
@@ -57,8 +63,10 @@ export default defineConfig({
         crosswalk: true,
         id: "com.mosl.boardconnect",
         share: {
-          scope: "https://myzonebeta.motilaloswal.com/boardmeeting/share",
-          url: "https://myzonebeta.motilaloswal.com/boardmeeting",
+          // scope: `${baseUrl}/share`, // Updated scope with baseUrl
+
+          scope:`${baseUrl}/share`,
+          url: baseUrl,
         },
         screenshots: [
           {
@@ -77,14 +85,5 @@ export default defineConfig({
       },
     }),
   ],
-  server: {
-    proxy: {
-      "/BoardMeetingApi": {
-        target: "https://myzonebeta.motilaloswal.com",
-        changeOrigin: true,
-        rewrite: (path) =>
-          path.replace(/^\/BoardMeetingApi/, "/BoardMeetingApi"),
-      },
-    },
-  },
+
 });
