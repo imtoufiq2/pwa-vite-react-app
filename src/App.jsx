@@ -13,7 +13,14 @@ function App() {
   // Disable Print Screen (PrtSc)
   useEffect(() => {
     const handlePrintScreen = (event) => {
-      if (event.key === "PrintScreen") {
+      const isPrintScreen = event.key === "PrintScreen";
+      const isWindowsShiftS =
+        event.code === "KeyS" &&
+        event.shiftKey &&
+        (event.ctrlKey || event.metaKey);
+
+      // if (event.key === "PrintScreen") {
+      if (isPrintScreen || isWindowsShiftS) {
         event.preventDefault();
         document.getElementById("root").innerHTML =
           "Screenshots are disabled on this application."; // Empty the #root element

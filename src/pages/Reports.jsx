@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
 import ResponsiveAppBar from "../components/ResponsiveAppBar";
-import { MuiList } from "../components/MuiList";
 // import { reportsList } from "../data/reports";
 import { useCallback, useEffect, useState } from "react";
 import DescriptionIcon from "@mui/icons-material/Description";
@@ -15,6 +14,7 @@ import pdfLogo from "/icons8-export-pdf-50.png";
 import DarkMode from "../components/DarkMode";
 import { baseUrl } from "../App";
 import { baseStr } from "../routers";
+import { MuiReportList } from "../components/MuiReportList";
 
 const Reports = () => {
   const navigate = useNavigate();
@@ -140,7 +140,7 @@ const Reports = () => {
               },
             }}
           >
-            <MuiList
+            <MuiReportList
               listToShow={filteredList}
               showIcon
               nextRoute="file/view"
