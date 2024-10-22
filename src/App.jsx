@@ -11,28 +11,182 @@ export const baseUrl = "https://myzonehr.motilaloswal.com/boardmeetingapi";
 function App() {
   const [isAndroid, setIsAndroid] = useState(false);
   // Disable Print Screen (PrtSc)
+  // useEffect(() => {
+  //   const handlePrintScreen = (event) => {
+  //     const isPrintScreen = event.key === "PrintScreen";
+  //     const isWindowsShiftS =
+  //       event.code === "KeyS" &&
+  //       event.shiftKey &&
+  //       (event.ctrlKey || event.metaKey);
+
+  //     // if (event.key === "PrintScreen") {
+  //     if (isPrintScreen || isWindowsShiftS) {
+  //       event.preventDefault();
+  //       // document.getElementById("root").innerHTML =
+  //       //   "Screenshots are disabled on this application."; // Empty the #root element
+
+  //       // toast.error("Screenshots are disabled, and the content is hidden.");
+  //       // Get the root element
+  //       const rootElement = document.getElementById("root");
+
+  //       // Clear the content of the root element
+  //       rootElement.innerHTML = "";
+
+  //       // Create a container div to hold the message and button
+  //       const container = document.createElement("div");
+  //       container.style.display = "flex";
+  //       container.style.flexDirection = "column";
+  //       container.style.justifyContent = "center";
+  //       container.style.alignItems = "center";
+  //       container.style.position = "fixed";
+  //       container.style.top = "50%";
+  //       container.style.left = "50%";
+  //       container.style.transform = "translate(-50%, -50%)";
+  //       container.style.backgroundColor = "#f8f9fa";
+  //       container.style.padding = "20px";
+  //       container.style.borderRadius = "8px";
+  //       container.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
+  //       container.style.textAlign = "center";
+
+  //       // Create a message element
+  //       const message = document.createElement("p");
+  //       message.textContent = "Screenshots are disabled on this application.";
+  //       message.style.marginBottom = "20px";
+  //       message.style.fontSize = "18px";
+  //       message.style.color = "#333";
+
+  //       // Create a button element
+  //       const refreshButton = document.createElement("button");
+  //       refreshButton.textContent = "Refresh Page";
+  //       refreshButton.style.padding = "10px 20px";
+  //       refreshButton.style.fontSize = "16px";
+  //       refreshButton.style.backgroundColor = "#ff7b00";
+  //       refreshButton.style.color = "#fff";
+  //       refreshButton.style.border = "none";
+  //       refreshButton.style.borderRadius = "4px";
+  //       refreshButton.style.cursor = "pointer";
+  //       refreshButton.style.outline = "none";
+
+  //       // Add hover effect for the button
+  //       refreshButton.onmouseover = function () {
+  //         refreshButton.style.backgroundColor = "#ff7b00";
+  //       };
+  //       refreshButton.onmouseout = function () {
+  //         refreshButton.style.backgroundColor = "#ff7b00";
+  //       };
+
+  //       // Add an onClick event to the button to refresh the page
+  //       refreshButton.addEventListener("click", () => {
+  //         window.location.reload(); // Refresh the page
+  //       });
+
+  //       // Append the message and button to the container
+  //       container.appendChild(message);
+  //       container.appendChild(refreshButton);
+
+  //       // Append the container to the root element
+  //       rootElement.appendChild(container);
+
+  //       // Show the toast notification
+  //       toast.error("Screenshots are disabled, and the content is hidden.");
+  //     }
+  //   };
+
+  //   window.addEventListener("keyup", handlePrintScreen);
+
+  //   return () => {
+  //     window.removeEventListener("keyup", handlePrintScreen);
+  //   };
+  // }, []);
   useEffect(() => {
-    const handlePrintScreen = (event) => {
+    const handleKeyEvents = (event) => {
       const isPrintScreen = event.key === "PrintScreen";
       const isWindowsShiftS =
         event.code === "KeyS" &&
         event.shiftKey &&
         (event.ctrlKey || event.metaKey);
+      // const isMeta = event.metaKey || event.key === "Meta";
+      // Check if Meta (Command/Windows) and Shift are both pressed
+      const isMetaWithShift =
+        (event.metaKey || event.key === "Meta") && event.shiftKey;
 
-      // if (event.key === "PrintScreen") {
-      if (isPrintScreen || isWindowsShiftS) {
+      if (isPrintScreen || isWindowsShiftS || isMetaWithShift) {
         event.preventDefault();
-        document.getElementById("root").innerHTML =
-          "Screenshots are disabled on this application."; // Empty the #root element
 
+        // Get the root element
+        const rootElement = document.getElementById("root");
+
+        // Clear the content of the root element
+        rootElement.innerHTML = "";
+
+        // Create a container div to hold the message and button
+        const container = document.createElement("div");
+        container.style.display = "flex";
+        container.style.flexDirection = "column";
+        container.style.justifyContent = "center";
+        container.style.alignItems = "center";
+        container.style.position = "fixed";
+        container.style.top = "50%";
+        container.style.left = "50%";
+        container.style.transform = "translate(-50%, -50%)";
+        container.style.backgroundColor = "#f8f9fa";
+        container.style.padding = "20px";
+        container.style.borderRadius = "8px";
+        container.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
+        container.style.textAlign = "center";
+
+        // Create a message element
+        const message = document.createElement("p");
+        message.textContent = "Screenshots are disabled on this application.";
+        message.style.marginBottom = "20px";
+        message.style.fontSize = "18px";
+        message.style.color = "#333";
+
+        // Create a button element
+        const refreshButton = document.createElement("button");
+        refreshButton.textContent = "Refresh Page";
+        refreshButton.style.padding = "10px 20px";
+        refreshButton.style.fontSize = "16px";
+        refreshButton.style.backgroundColor = "#ff7b00";
+        refreshButton.style.color = "#fff";
+        refreshButton.style.border = "none";
+        refreshButton.style.borderRadius = "4px";
+        refreshButton.style.cursor = "pointer";
+        refreshButton.style.outline = "none";
+
+        // Add hover effect for the button
+        refreshButton.onmouseover = function () {
+          refreshButton.style.backgroundColor = "#ff7b00";
+        };
+        refreshButton.onmouseout = function () {
+          refreshButton.style.backgroundColor = "#ff7b00";
+        };
+
+        // Add an onClick event to the button to refresh the page
+        refreshButton.addEventListener("click", () => {
+          window.location.reload(); // Refresh the page
+        });
+
+        // Append the message and button to the container
+        container.appendChild(message);
+        container.appendChild(refreshButton);
+
+        // Append the container to the root element
+        rootElement.appendChild(container);
+
+        // Show the toast notification
         toast.error("Screenshots are disabled, and the content is hidden.");
       }
     };
 
-    window.addEventListener("keyup", handlePrintScreen);
+    // Add event listeners for both keydown and keyup
+    window.addEventListener("keydown", handleKeyEvents);
+    window.addEventListener("keyup", handleKeyEvents);
 
+    // Cleanup event listeners on component unmount
     return () => {
-      window.removeEventListener("keyup", handlePrintScreen);
+      window.removeEventListener("keydown", handleKeyEvents);
+      window.removeEventListener("keyup", handleKeyEvents);
     };
   }, []);
 
@@ -86,6 +240,22 @@ function App() {
       <div>Sorry, this application is not supported on Android devices.</div>
     );
   }
+
+  // const disableScreenshort = (
+  //   <div id="_disable_screenshort">
+  //     <div className="content_block">
+  //       <h3>Sorry, this application is not supported on Android devices</h3>
+  //       <Tooltip title="Click to refresh and go back to the app" arrow>
+  //         <Button
+  //           style={{ backgroundColor: "orange", color: "white" }}
+  //           onClick={() => window.location.reload()}
+  //         >
+  //           Refresh
+  //         </Button>
+  //       </Tooltip>
+  //     </div>
+  //   </div>
+  // );
 
   return (
     <ThemeCustomization>

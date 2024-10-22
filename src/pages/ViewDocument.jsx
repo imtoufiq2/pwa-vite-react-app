@@ -79,7 +79,7 @@ const ViewDocument = () => {
       setLoading(false);
       // throw new Error("Somethings went wrong");
     }
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     getReportDetails();

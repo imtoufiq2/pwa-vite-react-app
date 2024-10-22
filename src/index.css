@@ -731,3 +731,16 @@ border: 2px solid #fbb02f;
 #_button_dark .MuiBottomNavigationAction-label.css-1drnm16-MuiBottomNavigationAction-label{
   font-size: 16px !important;
 }
+.pdf-canvas canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+.pg-viewer-wrapper {
+  overflow: hidden !important;
+}
+.pdf-loading{
+  text-align: center !important;
+  min-height: 80vh !important;
+  margin-top: 40% !important;
+  font-weight: bold !important;
+}
