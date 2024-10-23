@@ -1,70 +1,110 @@
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
-import Comments from "../comment";
-import { useGlobalHook } from "../../context/Contexts";
-import FileViewer from "react-file-viewer";
+import { useCallback, useEffect, useState } from "react";
+import Loader from "../loader/Loader";
 
 const PdfViewer = ({ pdfUrl }) => {
-  console.log(pdfUrl);
-  const { darkMode } = useGlobalHook();
-  const [pdfLoaded, setPdfLoaded] = useState(false);
-  const fileType = "pdf"; // Set the file type
+  const [loading, setLoading] = useState(true);
+  const [timer, setTimer] = useState(10000); // Default timer duration
 
-  const onError = (e) => {
-    console.log(e, "error in file-viewer");
-  };
+  // Fetch PDF file size and adjust timer based on size
+  const handleGet = useCallback(async () => {
+    try {
+      const response = await fetch(pdfUrl);
 
-  // Function to apply dark mode styles
-  // const applyDarkModeStyles = () => {};
-
-  // useEffect(() => {
-  //   if (pdfLoaded) {
-  //     applyDarkModeStyles();
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [darkMode, pdfLoaded]); // Apply styles when darkMode or pdfLoaded state changes
-  // const data = document.getElementsByClassName("pdf-viewer");
-  // console.log("data000000000", data);
-  // Function to apply dark mode styles
-  const applyDarkModeStyles = () => {
-    const data = document.getElementsByClassName("pdf-viewer");
-
-    // Check if the pdf-viewer class exists
-    if (data.length > 0) {
-      const viewerElement = data[0]; // Get the first element
-      if (darkMode) {
-        viewerElement.style.filter = "invert(1)";
-      } else {
-        viewerElement.style.filter = "invert(0)";
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
       }
+
+      // Read the response body as text
+      const data = await response.text();
+      const dataSize = new Blob([data]).size;
+
+      // Set timer based on the size of the fetched data
+      if (dataSize > 23557111) {
+        setTimer(10000); // Set longer timer for larger files
+      } else {
+        setTimer(5000); // Set shorter timer for smaller files
+      }
+
+      console.log(`Data size: ${dataSize} bytes`); // Log the size of the data
+
+      // Automatically hide the loader after the timer duration
+      setLoading(true); // Set loading to true before starting timer
+      setTimeout(() => {
+        setLoading(false); // Hide loader after timer duration
+      }, timer);
+    } catch (error) {
+      console.error("Fetch error:", error);
     }
-  };
+  }, [pdfUrl, timer]);
 
   useEffect(() => {
-    if (pdfLoaded) {
-      applyDarkModeStyles();
+    if (!pdfUrl) return; // If no URL, exit
+    handleGet(); // Fetch the PDF
+  }, [handleGet, pdfUrl]);
+  useEffect(() => {
+    // Scroll to the top of the page on component mount
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    const iframe = document.getElementById("my-iframe");
+    if (iframe) {
+      const style = document.createElement("style");
+      style.textContent = `
+        @media print {
+          body {
+            display: none !important;
+          }
+        }
+      `;
+      iframe.contentWindow.document.head.appendChild(style);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [darkMode, pdfLoaded]); // Apply styles when darkMode or pdfLoaded state changes
+  }, []);
+
   return (
-    <div
-      id="_pdf_viewer"
-      className={`file-viewer ${darkMode ? "pdf-dark-mode" : ""}`} // Add file-viewer class
-    >
-      <Comments />
-      <FileViewer
-        fileType={fileType}
-        filePath={pdfUrl} // Use the passed pdfUrl
-        onError={onError}
-        allowFullScreen={true}
-        onDocumentLoad={() => setPdfLoaded(true)} // Set pdfLoaded state on load
-      />
-    </div>
+    <>
+      <h3 style={{ display: loading ? "inline" : "none" }}>
+        <Loader />
+      </h3>
+      <>
+        <iframe
+          id="my-iframe"
+          onKeyDown={(e) => {
+            if (e.ctrlKey && e.key === "s") {
+              e.preventDefault();
+              alert("Save function is disabled.");
+            }
+            // debugger;
+          }}
+          // id="pdfIframe"
+          // src={loading ? undefined : `${pdfUrl}#toolbar=0`} // Load only when not loading
+          src={`${pdfUrl}#toolbar=0`}
+          name="iframe_a"
+          height={"100vh"}
+          width={"100%"}
+          style={{
+            minHeight: "100vh",
+            display: loading ? "none" : "inline", // Hide iframe while loading
+          }}
+          onContextMenu="return false;"
+          // title="Iframe Example"
+          onLoad={() => {
+            console.log("Iframe content loaded");
+            setLoading(false); // Set loading to false when iframe is loaded
+          }}
+        />
+        {/* <div
+          className="overlay"
+          onContextMenu={(e) => e.preventDefault()}
+        ></div> */}
+      </>
+    </>
   );
 };
+
+export default PdfViewer;
 
 PdfViewer.propTypes = {
   pdfUrl: PropTypes.string.isRequired,
 };
-
-export default PdfViewer;

@@ -731,11 +731,11 @@ border: 2px solid #fbb02f;
 #_button_dark .MuiBottomNavigationAction-label.css-1drnm16-MuiBottomNavigationAction-label{
   font-size: 16px !important;
 }
-.pdf-canvas canvas {
+/* .pdf-canvas canvas {
   width: 100% !important;
   height: 100% !important;
-}
-.pg-viewer-wrapper {
+} */
+/* .pg-viewer-wrapper {
   overflow: hidden !important;
 }
 .pdf-loading{
@@ -744,4 +744,15 @@ border: 2px solid #fbb02f;
   max-height: 10vh !important;
   margin-top: 10% !important;
   font-weight: bold !important;
-}
+} */
+
+
+/* .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0);
+  z-index: 10;
+} */
