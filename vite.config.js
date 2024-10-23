@@ -7,6 +7,7 @@ const brandingLogo = "/Branding_logo.png";
 const exportPdfIcon = "/icons8-export-pdf-50.png";
 
 export const baseUrl = "https://myzonehr.motilaloswal.com/boardmeetingapi";
+// export const baseUrl = "https://myzonebeta.motilaloswal.com/BoardMeetingApi";
 export const deployedUrl="https://myzonehr.motilaloswal.com/BoardMeetingApp"
 //  export const deployedUrl="https://organizer.fitizenindia.com/BoardMeetingApp"
 
@@ -83,8 +84,16 @@ export default defineConfig({
           },
         ],
       },
+      workbox: {
+        cacheId: 'boardmeeting-cache-v1', // change this for every deployment to invalidate old cache
+    cleanupOutdatedCaches: true,
+    maximumFileSizeToCacheInBytes: 10 * 1024 * 1024, // Set limit to 10 MB
+      },
       registerType: 'autoUpdate',
-
+      cacheBusting: {
+        enabled: true,
+        mode: 'hash',
+      },
     }),
   ],
 
