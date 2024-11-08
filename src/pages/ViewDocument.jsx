@@ -13,11 +13,39 @@ import DarkMode from "../components/DarkMode";
 import { baseUrl } from "../App";
 import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
+import ReactPdfViewer from "../components/react-pdf-viewer/ReactPdfViewer";
 
 const ViewDocument = () => {
   const [loading, setLoading] = useState(false);
   const [reportFile, setReportFile] = useState("");
   const { id } = useParams();
+  const [isLargeFile, setIsLargeFile] = useState(false);
+  const [showFileViwer, setShowFileViewer] = useState(false);
+
+  const limitToChangeViwer = 10000000;
+  // function to get the file size
+
+  const handleGet = useCallback(async (pdfUrl) => {
+    try {
+      const response = await fetch(pdfUrl);
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      // Read the response body as text
+      const data = await response.text();
+      const dataSize = new Blob([data])?.size ?? 0;
+      if (dataSize > limitToChangeViwer) {
+        setIsLargeFile(true);
+      }
+      setShowFileViewer(false);
+      console.log(`Data size: ${dataSize} bytes`); // Log the size of the data
+    } catch (error) {
+      console.error("Fetch error:", error);
+      setShowFileViewer(false);
+    }
+  }, []);
 
   const getReportDetails = useCallback(async () => {
     if (!id) {
@@ -27,6 +55,7 @@ const ViewDocument = () => {
     const body = { meetingDetailId: id ?? "0" };
     try {
       setLoading(true);
+      setShowFileViewer(true);
       const encryptedData = encryptData(body);
       const response = await fetch(
         `${baseUrl}/api/Meeting/GetReportPathDetails`,
@@ -55,6 +84,10 @@ const ViewDocument = () => {
 
       if (responseData?.success) {
         setReportFile(responseData?.data?.ReportPath ?? "");
+
+        //checking the file size
+        handleGet(getDecryptedPDFForJWT(responseData?.data?.ReportPath));
+
         sessionStorage.setItem(
           "xYz123!@#d",
           encryptData(
@@ -77,9 +110,10 @@ const ViewDocument = () => {
         }
       }
       setLoading(false);
+      setShowFileViewer(false);
       // throw new Error("Somethings went wrong");
     }
-  }, [id]);
+  }, [handleGet, id]);
 
   useEffect(() => {
     getReportDetails();
@@ -87,7 +121,7 @@ const ViewDocument = () => {
 
   return (
     <>
-      {loading ? (
+      {loading || showFileViwer ? (
         <Loader />
       ) : (
         <Box
@@ -102,7 +136,13 @@ const ViewDocument = () => {
             setSearchQuery={() => {}}
           />
           <DarkMode />
-          <PdfViewer pdfUrl={getDecryptedPDFForJWT(reportFile)} />
+          {!loading &&
+            !showFileViwer &&
+            (!isLargeFile ? (
+              <ReactPdfViewer pdfUrl={getDecryptedPDFForJWT(reportFile)} />
+            ) : (
+              <PdfViewer pdfUrl={getDecryptedPDFForJWT(reportFile)} /> // this is the blur
+            ))}
         </Box>
       )}
     </>

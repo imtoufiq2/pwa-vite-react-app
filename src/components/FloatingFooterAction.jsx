@@ -21,8 +21,11 @@ export default function FloatingFooterAction() {
     `${baseStr}/enter-mobile`,
     `${baseStr}/forgot-password`,
   ];
+  // const hidePrivateIcon = noShow.some((path) =>
+  //   location?.pathname.includes(path)
+  // );
   const hidePrivateIcon = noShow.some((path) =>
-    location?.pathname.includes(path)
+    location?.pathname.toLowerCase().includes(path.toLowerCase())
   );
 
   return (

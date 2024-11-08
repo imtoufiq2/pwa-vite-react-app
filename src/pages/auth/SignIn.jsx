@@ -112,7 +112,8 @@ export default function SignIn() {
       // clientCode: "kailash.purohit@motilaloswal.com",
       // password: "bW9zbEAxMjM0",
       clientCode: values?.email,
-      password: base64Encode(values?.password),
+      password: base64Encode(values?.password), // this is for the PROD
+      // password: values?.password, //this is for the UAT
       clientToken: "",
     };
 
