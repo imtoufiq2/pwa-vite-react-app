@@ -17,6 +17,7 @@ import getDateDetails from "../helpers/getDateDetails";
 import { useState } from "react";
 import { useGlobalHook } from "../context/Contexts";
 import { baseStr } from "../routers";
+import { whiteColor } from "../App";
 
 export const MuiListMeeting = ({ listToShow, setSearchQuery, searchQuery }) => {
   const navigate = useNavigate();
@@ -132,7 +133,7 @@ export const MuiListMeeting = ({ listToShow, setSearchQuery, searchQuery }) => {
                       fontSize: {
                         xs: "16px",
                         lg: "18px",
-                        color: darkMode && "#ffae18",
+                        color: darkMode && whiteColor,
                       },
                       letterSpacing: "-0.3px",
                       fontWeight: "500",

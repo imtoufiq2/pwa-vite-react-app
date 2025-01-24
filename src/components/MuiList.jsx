@@ -26,6 +26,7 @@ import { useTheme } from "@emotion/react";
 import FormModalExample from "./addComment";
 import ViewComments from "./viewComments";
 import { baseStr } from "../routers";
+import { whiteColor } from "../App";
 
 export const MuiList = ({
   showIcon,
@@ -159,7 +160,9 @@ export const MuiList = ({
                         letterSpacing: "-0.3px",
                         fontWeight: "500",
                         // color: "red",
-                        color: darkMode && "#ffae18",
+                        //${darkMode ? whiteColor : "#2b2e8c"}
+                        // color: darkMode && "#ffae18",
+                        color: `${darkMode ? whiteColor : "#2b2e8c"}`,
                         wordBreak: "break-word",
                         overflowWrap: "break-word",
                         whiteSpace: "normal",
@@ -208,23 +211,7 @@ export const MuiList = ({
                         borderRadius: "50%",
                       }}
                     >
-                      <VisibilityIcon sx={{ color: "orange" }} />
-                      {/* <Badge
-                        id="_badge"
-                        badgeContent={12} // The count to display
-                        color="primary" // Badge color
-                        sx={{
-                          position: "absolute",
-                          top: "6px", // Adjust these values to position the badge correctly
-                          right: "4px",
-                          "& .MuiBadge-dot": {
-                            borderRadius: "50%",
-                            width: 14,
-                            height: 14,
-                          },
-                        }}
-                      ></Badge>
-                      <VisibilityIcon sx={{ color: "orange" }} /> */}
+                      <VisibilityIcon sx={{ color: "#2b2e8c" }} />
                     </Fab>
                   </Tooltip>
 
@@ -249,7 +236,7 @@ export const MuiList = ({
                         // marginTop: "4px",
                       }}
                     >
-                      <AddIcon sx={{ color: "orange" }} />
+                      <AddIcon sx={{ color: "#2b2e8c" }} />
                     </Fab>
                   </Tooltip>
                 </Stack>

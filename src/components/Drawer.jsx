@@ -26,7 +26,7 @@ const Drawer = ({ setOpen }) => {
           bottom: "66px",
         }}
       >
-        <AddIcon sx={{ color: "orange" }} />
+        <AddIcon sx={{ color: "#2b2e8c" }} />
       </Fab>
     </Tooltip>
   );

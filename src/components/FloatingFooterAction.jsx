@@ -9,6 +9,7 @@ import { Fab } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useGlobalHook } from "../context/Contexts";
 import { baseStr } from "../routers";
+import { whiteColor } from "../App";
 
 export default function FloatingFooterAction() {
   const navigate = useNavigate();
@@ -59,13 +60,11 @@ export default function FloatingFooterAction() {
             bgcolor: darkMode ? "#343332" : "background.paper",
 
             "& .MuiBottomNavigationAction-root": {
-              color: "#fbb02f", // Set color of non-active icons
+              color: `${darkMode ? whiteColor : "#2b2e8c"}`, // Set color of non-active icons
             },
             "& .Mui-selected": {
               border: "none",
               outline: "none",
-              // color: "red", // Set color of active icon
-              // Remove border or outline
               "& .MuiBottomNavigationAction-icon": {
                 border: "none",
                 outline: "none",
@@ -86,28 +85,7 @@ export default function FloatingFooterAction() {
             }}
             icon={<ExitToAppRoundedIcon />}
           />
-          {/* <BottomNavigationAction
-            // label="Favorites"
-            id="_home_nav_button"
-            onClick={() => navigate("/boardmeeting/companies")}
-            disabled={location.pathname !== "/boardmeeting/companies"}
-            sx={{
-              display: hidePrivateIcon ? "none" : "flex",
-              border: "none",
-              outline: "none",
-            }}
-            icon={
-              <Fab
-                id="_home_nav_button_fab"
-                color="primary"
-                aria-label="add"
-                style={{ border: "none", outline: "none" }}
-                disabled={location.pathname !== "/boardmeeting/companies"}
-              >
-                <HomeRoundedIcon />
-              </Fab>
-            }
-          /> */}
+
           <BottomNavigationAction
             id="_home_nav_button"
             onClick={() => navigate(`${baseStr}/companies`)}
@@ -131,7 +109,7 @@ export default function FloatingFooterAction() {
                   color:
                     location.pathname !== `${baseStr}/companies`
                       ? "#ffffff"
-                      : "orange", // White icon when disabled
+                      : "#2b2e8c", // White icon when disabled
                 }}
                 disabled={location.pathname !== `${baseStr}/companies`}
               >

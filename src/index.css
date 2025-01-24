@@ -5,6 +5,14 @@
     display: none !important;
   }
 }
+
+@font-face {
+  font-family: 'Butler';
+  src: url('/fonts/Butler/Butler_Regular.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   font-family: "Poppins", sans-serif !important;
 }
@@ -30,9 +38,7 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
-a:hover {
-  /* color: #535bf2; */
-}
+
 
 body {
   margin: 0;
@@ -537,9 +543,7 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
-  /* border-color: #646cff; */
-}
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -717,11 +721,11 @@ input:-webkit-autofill:active {
 }
 
 .otp-input:focus {
-border: 2px solid #fbb02f;
-  outline: #fbb02f;
+border: 2px solid #2b2e8c;
+  outline: #2b2e8c;
 }
 .otp-input:filled {
-  border: 2px solid #fbb02f; /* Border color when filled */
+  border: 2px solid #2b2e8c; /* Border color when filled */
 }
 
 

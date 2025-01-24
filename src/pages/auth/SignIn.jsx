@@ -17,7 +17,7 @@ import { LoadingButton } from "@mui/lab";
 // import OnBoardingLogo from "../../components/logo";
 import ResponsiveImage from "../../components/Logo";
 import { useGlobalHook } from "../../context/Contexts";
-import { baseUrl } from "../../App";
+import { baseUrl, whiteColor } from "../../App";
 import { baseStr } from "../../routers";
 import { base64Encode } from "../../helpers/passwordEncptDecrpt";
 
@@ -200,8 +200,15 @@ export default function SignIn() {
               >
                 <Stack alignItems="center">
                   <Typography
-                    variant="h5"
-                    sx={{ color: "primary.main", fontWeight: 500 }}
+                    variant="h2"
+                    sx={{
+                      // color: "primary.main",
+                      // color: darkMode ? whiteColor : "#2b2e8c",
+                      color: darkMode ? whiteColor : "primary.main",
+                      fontWeight: 500,
+                      fontFamily: "Butler, serif",
+                      fontSize: "24px",
+                    }}
                   >
                     Login
                   </Typography>
@@ -367,14 +374,14 @@ export default function SignIn() {
                             disabled={isSubmitting}
                             sx={{
                               backgroundColor: isSubmitting
-                                ? "rgba(251, 140, 0, 0.5)"
+                                ? "rgba(46 , 42, 148 , 0.5)"
                                 : "primary.main",
                               borderColor: isSubmitting
-                                ? "rgba(251, 140, 0, 0.5)"
+                                ? "rgba(46 , 42, 148 , 0.5)"
                                 : "primary.main",
                               "&:hover": {
                                 borderColor: isSubmitting
-                                  ? "rgba(251, 140, 0, 0.5)"
+                                  ? "rgba(46 , 42, 148 , 0.5)"
                                   : "primary.main",
                               },
                               "&:active": {

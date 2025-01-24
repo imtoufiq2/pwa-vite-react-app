@@ -18,14 +18,13 @@ import {
   Fab,
   Badge,
 } from "@mui/material";
-import { orange } from "@mui/material/colors";
 import CloseIcon from "@mui/icons-material/Close";
 import { useGlobalHook } from "../../context/Contexts";
 import encryptData from "../../helpers/encryption";
 import decryptData from "../../helpers/decryption";
 import toast from "react-hot-toast";
 import { formatTimestamp } from "../../helpers/formatTimestamp";
-import { baseUrl } from "../../App";
+import { baseUrl, whiteColor } from "../../App";
 
 const ViewComments = ({ open, setOpen }) => {
   const { darkMode } = useGlobalHook();
@@ -70,7 +69,7 @@ const ViewComments = ({ open, setOpen }) => {
   };
 
   const tableHeaderStyle = {
-    bgcolor: orange[500],
+    bgcolor: "#2b2e8c",
     color: "white",
     fontWeight: "bold",
     whiteSpace: "nowrap", // Correct the spelling here
@@ -160,7 +159,6 @@ const ViewComments = ({ open, setOpen }) => {
             id="_icon_button"
             disabled
             onClick={handleClose}
-            style={{ color: orange[500], border: "none", outline: "none" }}
           >
             Total Comments = {commentsData?.length ?? 0}
           </IconButton> */}
@@ -197,13 +195,17 @@ const ViewComments = ({ open, setOpen }) => {
                   },
                 }}
               ></Badge>
-              <MarkUnreadChatAltRoundedIcon sx={{ color: "orange" }} />
+              <MarkUnreadChatAltRoundedIcon sx={{ color: "#2b2e8c" }} />
             </Fab>
           </Tooltip>
           <IconButton
             id="_icon_button"
             onClick={handleClose}
-            style={{ color: orange[500], border: "none", outline: "none" }}
+            style={{
+              color: `${darkMode ? whiteColor : "#2b2e8c"}`,
+              border: "none",
+              outline: "none",
+            }}
           >
             <CloseIcon id="_icon" style={{ border: "none", outline: "none" }} />
           </IconButton>
@@ -303,10 +305,15 @@ const ViewComments = ({ open, setOpen }) => {
           </>
         ) : (
           <Box sx={{ textAlign: "center", mt: 2 }}>
-            <Typography variant="h6" sx={{ color: orange[500] }}>
+            <Typography
+              variant="h6"
+              sx={{ color: `${darkMode ? whiteColor : "#2b2e8c"}` }}
+            >
               No Comments Found
             </Typography>
-            <Typography sx={{ color: orange[400], mt: 1 }}>
+            <Typography
+              sx={{ color: `${darkMode ? whiteColor : "#2b2e8c"}`, mt: 1 }}
+            >
               If you want to add comments, you can click the add button to add
               comments.
             </Typography>

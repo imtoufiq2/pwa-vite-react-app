@@ -16,7 +16,7 @@ import decryptData from "../../helpers/decryption";
 import toast from "react-hot-toast";
 import { useGlobalHook } from "../../context/Contexts";
 import ResponsiveImage from "../../components/Logo";
-import { baseUrl } from "../../App";
+import { baseUrl, whiteColor } from "../../App";
 import { baseStr } from "../../routers";
 import { base64Encode } from "../../helpers/passwordEncptDecrpt";
 
@@ -123,8 +123,12 @@ export default function ResetPassword() {
               >
                 <Stack alignItems="center">
                   <Typography
-                    variant="h5"
-                    sx={{ color: "primary.main", fontWeight: 500 }}
+                    variant="h2"
+                    sx={{
+                      color: darkMode ? whiteColor : "primary.main",
+                      fontWeight: 500,
+                      fontSize: "24px",
+                    }}
                   >
                     Reset Password
                   </Typography>
@@ -285,7 +289,7 @@ export default function ResetPassword() {
 
                                   backgroundColor: "secondary.main",
                                   "&:hover": {
-                                    borderColor: "#f57c00",
+                                    borderColor: "#0b0e77",
                                     backgroundColor: "secondary.main",
                                   },
                                   "&:active": {

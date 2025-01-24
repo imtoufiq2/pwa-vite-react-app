@@ -10,6 +10,12 @@ export default function ThemeCustomization({ children }) {
   const theme = createTheme({
     typography: {
       fontFamily: "Poppins, sans-serif !important",
+      h1: {
+        fontFamily: "Butler, serif", // Butler for h1
+      },
+      h2: {
+        fontFamily: "Butler, serif", // Butler for h2
+      },
     },
     breakpoints: {
       values: {
@@ -24,7 +30,7 @@ export default function ThemeCustomization({ children }) {
     palette: {
       primary: {
         // main: "#000000", // Black for primary color
-        main: "#fbb02f", // Black for primary color
+        main: "#2b2e8c", // Black for primary color
         // main: "#fdaf17", // Black for primary color
         contrastText: "#FFFFFF", // White text on primary
       },
@@ -55,11 +61,12 @@ export default function ThemeCustomization({ children }) {
             backgroundColor: "#000000", // Black background
             // backgroundColor: "#fdaf17", // Black background
             color: "#FFFFFF", // White text
-            border: "1px solid #f57c00", // Black border
+            border: "1px solid #0b0e77", // Black border
             padding: "6px 16px", // Set padding
             boxShadow: "none",
             "&:hover": {
-              backgroundColor: "#f57c00", // Slightly lighter black on hover
+              // backgroundColor: "#f57c00", // Slightly lighter black on hover
+              backgroundColor: "#0b0e77",
               boxShadow: "none",
             },
           },

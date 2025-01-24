@@ -14,6 +14,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import { useGlobalHook } from "../context/Contexts";
 import { baseStr } from "../routers";
+import { whiteColor } from "../App";
 // import { useGlobalHook } from "../Contexts";
 
 const Search = styled("div")(({ theme }) => ({
@@ -96,7 +97,8 @@ export default function SearchAppBar({
             alignItems: "center",
             gap: "8px",
             backgroundColor: "#fff",
-            color: "#fb8c00",
+            // color: "#2b2e8c", //todo darkMode ? "white" : "#343332",
+            color: darkMode ? whiteColor : "#2b2e8c",
           }}
           style={{ backgroundColor: darkMode ? "#343332" : "#fff" }}
         >
@@ -116,10 +118,12 @@ export default function SearchAppBar({
                   sx={{
                     display: { xs: "block", lg: "none" },
                     maxHeight: { xs: "38px", lg: "auto" },
-                    backgroundColor: "#fb8c00",
+                    // backgroundColor: "#2b2e8c",
+                    backgroundColor: `${darkMode ? whiteColor : "#474bb7"}`,
                     // backgroundColor: "#000",
                     "&:hover": {
-                      backgroundColor: "#fb8c0075",
+                      // backgroundColor: "red",
+                      backgroundColor: `${!darkMode ? whiteColor : "#474bb7"}`,
                     },
                     "&:focus": {
                       outline: "none",
@@ -131,7 +135,7 @@ export default function SearchAppBar({
                     id="_icon"
                     sx={{
                       fontSize: 20,
-                      color: "white",
+                      color: `${!darkMode ? whiteColor : "#2b2e8c"}`,
                       position: "relative", // Set position to relative
                       top: "-2px", // Move the icon upwards
                       left: "3px", // Move the icon to the right
@@ -143,18 +147,18 @@ export default function SearchAppBar({
                   variant="contained"
                   sx={{
                     display: { xs: "none", lg: "block" },
-                    // backgroundColor: "#f9af29",
+                    // backgroundColor: "#f9af29",     color: darkMode ? whiteColor : "#2b2e8c",
                     backgroundColor: darkMode ? "#343332" : "#fff",
-                    border: "2px solid #fb8c00",
+                    border: `2px solid ${darkMode ? whiteColor : "#2b2e8c"}`,
                     maxHeight: "38px", // Updated maxHeight
                     // color: "white",
-                    color: "#fb8c00",
+                    color: `${darkMode ? whiteColor : "#2b2e8c"}`,
                     borderRadius: "8px",
                     padding: "6px 12px", // Adjusted padding to fit within maxHeight
                     fontSize: "0.875rem", // Adjusted font size
                     lineHeight: "1.5", // Ensures text fits well
                     "&:hover": {
-                      backgroundColor: "white",
+                      backgroundColor: `${!darkMode ? whiteColor : "#2b2e8c"}`,
                       // border: "2px solid red",
                       opacity: "0.6",
                     },
@@ -188,7 +192,17 @@ export default function SearchAppBar({
             >
               <Icon sx={{ fontSize: 40 }} />
               {/* <img src={logo} alt="" /> */}
-              <Typography variant="h6" noWrap component="div">
+              <Typography
+                sx={{
+                  fontSize: {
+                    xs: "20px", // For small screens (<md)
+                    md: "24px", // For medium screens (>=md)
+                  },
+                }}
+                variant="h2"
+                noWrap
+                component="div"
+              >
                 {title}
               </Typography>
             </Stack>
@@ -202,9 +216,9 @@ export default function SearchAppBar({
               display: {
                 xs: "none",
                 lg: "block",
-                border: "1.3px solid #fb8c00",
+                border: `1.3px solid ${darkMode ? whiteColor : "#2b2e8c"}`,
                 "& .MuiInputBase-input::placeholder": {
-                  color: "#fb8c00",
+                  color: `${darkMode ? whiteColor : "#2b2e8c"}`,
                 },
               },
             }}

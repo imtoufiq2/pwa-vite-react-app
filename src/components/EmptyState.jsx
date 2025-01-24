@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { Typography, Container } from "@mui/material";
 import { useGlobalHook } from "../context/Contexts";
+import { whiteColor } from "../App";
 
 const EmptyState = ({
   title = "No results found",
@@ -19,7 +20,6 @@ const EmptyState = ({
         minHeight: "240px",
         bgcolor: darkMode ? "#343332" : "background.paper",
         textAlign: "center",
-        // border: "1px solid",
         borderColor: "#D7DFE9",
         maxWidth: "592px",
         borderRadius: 2,
@@ -31,7 +31,6 @@ const EmptyState = ({
         p: 3, // Adding padding for better spacing
         width: {
           xs: "95%",
-          // sm: "auto",
         },
       }}
     >
@@ -39,7 +38,7 @@ const EmptyState = ({
         variant="h4"
         gutterBottom
         sx={{
-          color: "#f8a206",
+          color: `${darkMode ? whiteColor : "#2b2e8c"}`,
           fontWeight: 600,
           fontSize: "1.25rem", // Using rem for better responsiveness
           lineHeight: 1.75, // Using unitless line-height for better scaling
@@ -51,7 +50,7 @@ const EmptyState = ({
       <Typography
         variant="body1"
         sx={{
-          color: "#f8a206",
+          color: `${darkMode ? whiteColor : "#2b2e8c"}`,
           fontWeight: 400,
           fontSize: "0.875rem", // Using rem for better responsiveness
           lineHeight: 1.5, // Using unitless line-height for better scaling

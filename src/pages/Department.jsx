@@ -87,8 +87,6 @@ const Department = () => {
           <Box
             className="poppins"
             sx={{
-              // minHeight: "100vh",
-              // overflow: "hidden",
               maxWidth: "592px",
               margin: "auto",
               marginTop: {

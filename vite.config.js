@@ -33,7 +33,7 @@ export default defineConfig({
         short_name: "BoardConnect",
         description:
           "A comprehensive and intuitive meeting management tool for board members of MOSL (Motilal Oswal).",
-        theme_color: "#fbb02f",
+        theme_color: "#2b2e8c",
         icons: [
           {
             src: faviconURL.replace(/^\//, ""),

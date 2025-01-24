@@ -6,6 +6,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import IconButton from "@mui/material/IconButton";
 import { useEffect, useRef } from "react";
 import { useGlobalHook } from "../context/Contexts";
+import { whiteColor } from "../App";
 // import { useGlobalHook } from "../Contexts";
 
 const Search = styled("div")(({ theme }) => ({
@@ -46,11 +47,11 @@ const StyledInputBase = styled(InputBase)(({ theme, darkMode }) => ({
     border: !darkMode && `2px solid #dcd8d4b3`, // Gray border in normal state
     outline: "none", // Remove default outline
     "&::placeholder": {
-      color: darkMode && "#ffae18", // Placeholder color
+      color: darkMode && whiteColor, // Placeholder color
     },
     "&:focus": {
       width: "100%", // Full width on focus
-      border: `${darkMode ? "1px" : "2px"} solid #f9af29`,
+      border: `${darkMode ? "1px" : "2px"} solid #2b2e8c`,
     },
 
     [theme.breakpoints.up("sm")]: {
@@ -83,7 +84,7 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
       }}
     >
       <SearchIconWrapper>
-        <SearchIcon sx={{ color: "#ffae18" }} />
+        <SearchIcon sx={{ color: `${darkMode ? whiteColor : "#2b2e8c"}` }} />
       </SearchIconWrapper>
       <StyledInputBase
         placeholder="Search…"
@@ -105,7 +106,7 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
             outline: "none",
           }}
         >
-          <ClearIcon style={{ color: "#ff3232" }} />
+          <ClearIcon style={{ color: "#df4d4d" }} />
         </IconButton>
       )}
     </Search>

@@ -13,12 +13,14 @@ import decryptData from "../../helpers/decryption";
 import toast from "react-hot-toast";
 import ResponsiveImage from "../../components/Logo";
 import { LoadingButton } from "@mui/lab";
-import { baseUrl } from "../../App";
+import { baseUrl, whiteColor } from "../../App";
 import { baseStr } from "../../routers";
+import { useGlobalHook } from "../../context/Contexts";
 
 const numberOfDigits = 6;
 export default function VerifyMobile() {
   const navigate = useNavigate();
+  const { darkMode } = useGlobalHook();
 
   const [otp, setOtp] = useState(new Array(numberOfDigits).fill(""));
   const [loading, setLoading] = useState(false);
@@ -198,8 +200,12 @@ export default function VerifyMobile() {
               >
                 <Stack alignItems="center">
                   <Typography
-                    variant="h5"
-                    sx={{ color: "primary.main", fontWeight: 500 }}
+                    variant="h2"
+                    sx={{
+                      color: darkMode ? whiteColor : "primary.main",
+                      fontWeight: 500,
+                      fontSize: "24px",
+                    }}
                   >
                     Enter OTP
                   </Typography>
@@ -299,7 +305,7 @@ export default function VerifyMobile() {
                             color: "primary.main",
                             backgroundColor: "secondary.main",
                             "&:hover": {
-                              borderColor: "#f57c00",
+                              borderColor: "#0b0e77",
                               backgroundColor: "secondary.main",
                             },
                             "&:active": {

@@ -2,12 +2,12 @@ import { useCallback, useState } from "react";
 import { TextField, Box, Modal, Typography, IconButton } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import CloseIcon from "@mui/icons-material/Close";
-import { orange } from "@mui/material/colors";
+// import { orange } from "@mui/material/colors";
 import encryptData from "../../helpers/encryption";
 import decryptData from "../../helpers/decryption";
 import toast from "react-hot-toast";
 import { useGlobalHook } from "../../context/Contexts";
-import { baseUrl } from "../../App";
+import { baseUrl, whiteColor } from "../../App";
 
 // eslint-disable-next-line react/prop-types
 const FormModalExample = ({ setOpen, open }) => {
@@ -195,7 +195,7 @@ const FormModalExample = ({ setOpen, open }) => {
           id="_icon_button"
           onClick={handleClose}
           style={{
-            color: orange[500],
+            color: `${darkMode ? whiteColor : "#2b2e8c"}`,
             position: "absolute",
             top: 10,
             right: 10,
@@ -250,12 +250,12 @@ const FormModalExample = ({ setOpen, open }) => {
                 borderColor: darkMode ? "white" : theme.palette.text.primary,
               },
               "& .MuiOutlinedInput-root.Mui-focused": {
-                borderColor: darkMode ? "white" : "orange",
+                borderColor: darkMode ? "white" : "#2b2e8c",
                 "& .MuiInputLabel-root": {
                   color: darkMode ? "white" : theme.palette.primary.main,
                 },
                 "& .MuiInputBase-root": {
-                  borderColor: darkMode ? "white" : "orange",
+                  borderColor: darkMode ? "white" : "#2b2e8c",
                 },
                 "& .MuiInputBase-input": {
                   color: darkMode ? "white" : theme.palette.text.primary,
@@ -297,12 +297,12 @@ const FormModalExample = ({ setOpen, open }) => {
                 borderColor: darkMode ? "white" : theme.palette.text.primary,
               },
               "& .MuiOutlinedInput-root.Mui-focused": {
-                borderColor: darkMode ? "white" : "orange",
+                borderColor: darkMode ? "white" : "#2b2e8c",
                 "& .MuiInputLabel-root": {
                   color: darkMode ? "white" : theme.palette.primary.main,
                 },
                 "& .MuiInputBase-root": {
-                  borderColor: darkMode ? "white" : "orange",
+                  borderColor: darkMode ? "white" : "#2b2e8c",
                 },
                 "& .MuiInputBase-input": {
                   color: darkMode ? "white" : theme.palette.text.primary,
@@ -320,9 +320,9 @@ const FormModalExample = ({ setOpen, open }) => {
             variant="contained"
             sx={{
               mt: 3,
-              bgcolor: "orange",
+              bgcolor: "#2b2e8c",
               "&:hover": {
-                bgcolor: "darkorange",
+                bgcolor: "#3539b5",
               },
             }}
             fullWidth

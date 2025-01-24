@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 
 export const baseUrl = "https://myzonehr.motilaloswal.com/boardmeetingapi";
 // export const baseUrl = "https://myzonebeta.motilaloswal.com/BoardMeetingApi";
-
+export const whiteColor = "#fff";
 function App() {
   const [isAndroid, setIsAndroid] = useState(false);
   // Disable Print Screen (PrtSc)
@@ -67,7 +67,6 @@ function App() {
   //       refreshButton.style.cursor = "pointer";
   //       refreshButton.style.outline = "none";
 
-  //       // Add hover effect for the button
   //       refreshButton.onmouseover = function () {
   //         refreshButton.style.backgroundColor = "#ff7b00";
   //       };
@@ -154,7 +153,6 @@ function App() {
         refreshButton.style.cursor = "pointer";
         refreshButton.style.outline = "none";
 
-        // Add hover effect for the button
         refreshButton.onmouseover = function () {
           refreshButton.style.backgroundColor = "#ff7b00";
         };
@@ -240,22 +238,6 @@ function App() {
       <div>Sorry, this application is not supported on Android devices.</div>
     );
   }
-
-  // const disableScreenshort = (
-  //   <div id="_disable_screenshort">
-  //     <div className="content_block">
-  //       <h3>Sorry, this application is not supported on Android devices</h3>
-  //       <Tooltip title="Click to refresh and go back to the app" arrow>
-  //         <Button
-  //           style={{ backgroundColor: "orange", color: "white" }}
-  //           onClick={() => window.location.reload()}
-  //         >
-  //           Refresh
-  //         </Button>
-  //       </Tooltip>
-  //     </div>
-  //   </div>
-  // );
 
   return (
     <ThemeCustomization>
